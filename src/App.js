@@ -86,7 +86,7 @@ class App extends Component {
                 secondaryText={
                   <p><span style={{ color: '#CCC' }}>
                     <EditorInsertInvitation style={icon} />{moment(p.timestamp).format("DD/MM/YY HH:mm")}, {p.author}</span><br />
-                    {p.body.substring(0, 40)}</p>
+                    {p.body.substring(0, 100)}</p>
                 }
 
                 secondaryTextLines={2}
