@@ -14,7 +14,7 @@ import ActionGrade from 'material-ui/svg-icons/action/grade';
 import EditorInsertInvitation from 'material-ui/svg-icons/editor/insert-invitation';
 import moment from 'moment';
 
-import * as  Api from './util/api';
+import * as Api from '../../util/api';
 
 const style = {
   position: 'fixed',
@@ -43,7 +43,7 @@ const icon = {
 }
 
 
-class App extends Component {
+class RootView extends Component {
 
   state = {
     categories: [],
@@ -111,4 +111,4 @@ const MenuNavTop = ({ categorySelected, handleChange }) => (
   </div >
 );
 
-export default App;
+export default RootView;
