@@ -9,12 +9,15 @@ import {
   Divider,
   Badge
 } from 'material-ui';
+
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import ActionGrade from 'material-ui/svg-icons/action/grade';
 import EditorInsertInvitation from 'material-ui/svg-icons/editor/insert-invitation';
 import moment from 'moment';
-
 import * as Api from '../../util/api';
+import { connect } from 'react-redux';
+
+import { rootChangeCategoryAction, rootListCategoriesAction, rootListPostsAction } from '../../actions/RootActions';
 
 const style = {
   position: 'fixed',
@@ -44,37 +47,21 @@ const icon = {
 
 
 class RootView extends Component {
-
-  state = {
-    categories: [],
-    posts: [],
-    categorySelected: "all"
-  }
-
-  handleChange = (event, index, categorySelected) => this.setState({ categorySelected });
   componentDidMount() {
-
-    Api.getAllPosts().then(posts => {
-      console.log(posts);
-      this.setState({ posts })
-    })
-
-    Api.getAllCategories().then(categories => {
-      this.setState({ categories })
-    });
+    this.props.rootListCategoriesAction();
+    this.props.rootListPostsAction();
   }
-
   render() {
     return (
       <div>
         <AppBar title="Leitura"
-          iconElementRight={<MenuNavTop categorySelected={this.state.categorySelected} handleChange={this.handleChange} />}>
+          iconElementRight={<MenuNavTop categorySelected={this.props.categorySelected} handleChange={this.props.rootChangeCategoryAction} />}>
         </AppBar>
         <FloatingActionButton style={style}>
           <ContentAdd />
         </FloatingActionButton>
         <List>
-          {this.state.posts.map(p => (
+          {this.props.posts.map(p => (
             <div key={p.id}>
               <ListItem
                 leftIcon={<Badge
@@ -88,7 +75,6 @@ class RootView extends Component {
                     <EditorInsertInvitation style={icon} />{moment(p.timestamp).format("DD/MM/YY HH:mm")}, {p.author}</span><br />
                     {p.body.substring(0, 100)}</p>
                 }
-
                 secondaryTextLines={2}
               />
               <Divider inset={true} />
@@ -102,7 +88,7 @@ class RootView extends Component {
 const MenuNavTop = ({ categorySelected, handleChange }) => (
   <div>
     <label style={styleLabel}>Cetegorias:</label>
-    <DropDownMenu labelStyle={ddmStyle} maxHeight={300} value={categorySelected} onChange={handleChange}>
+    <DropDownMenu labelStyle={ddmStyle} maxHeight={300} value={categorySelected} onChange={(event, index, categorySelected) => handleChange(categorySelected)}>
       <MenuItem value="all" key="all" primaryText="Todos" />
       <MenuItem value="react ad asd" key="reacta sdasda" primaryText="Reactsa asd asdasdas" />
       <MenuItem value="react" key="react" primaryText="React" />
@@ -111,4 +97,16 @@ const MenuNavTop = ({ categorySelected, handleChange }) => (
   </div >
 );
 
-export default RootView;
+const mapStateToProps = state => (
+  {
+    categorySelected: state.RootReducer.categorySelected
+    , posts: state.RootReducer.posts
+  }
+);
+
+export default connect(mapStateToProps, {
+  rootChangeCategoryAction
+  , rootListCategoriesAction
+  , rootListPostsAction
+})(RootView);
+
