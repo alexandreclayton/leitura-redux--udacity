@@ -15,7 +15,7 @@ export const rootChangeCategoryAction = category => {
 export const rootListCategoriesAction = () => {
     return dispatch => {
         Api.getAllCategories().then(categories => {
-            dispatch({ type: ROOT_LIST_CATEGORIES, payload: { categories } })
+            dispatch({ type: ROOT_LIST_CATEGORIES, payload:  categories  })
         });
     }
 }
