@@ -1,0 +1,1 @@
+export const If = ({ test, fail = false, children }) => (test ? children : fail);

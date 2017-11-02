@@ -7,7 +7,12 @@ import {
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import { connect } from 'react-redux';
 
-import { rootChangeCategoryAction, rootListCategoriesAction, rootListPostsAction } from '../../actions/RootActions';
+import {
+  rootChangeCategoryAction
+  , rootListCategoriesAction
+  , rootListPostsAction
+  , rootOpenDialogAction
+} from '../../actions/RootActions';
 
 // Components
 import { MenuNavTop, ListPosts } from '../../components';
@@ -24,7 +29,6 @@ class RootView extends Component {
     this.props.rootListPostsAction();
   }
   render() {
-    console.log(this.props.posts);
     return (
       <div>
         <AppBar title="Leitura"
@@ -33,10 +37,12 @@ class RootView extends Component {
             categorySelected={this.props.categorySelected}
             handleChange={this.props.rootChangeCategoryAction} />}>
         </AppBar>
-        <FloatingActionButton style={style}>
+        <FloatingActionButton
+          style={style}
+          onClick={() => this.props.rootOpenDialogAction(true)}>
           <ContentAdd />
         </FloatingActionButton>
-        <ListPosts posts={this.props.posts}/>        
+        <ListPosts posts={this.props.posts} />
       </div>
     );
   }
@@ -47,6 +53,7 @@ const mapStateToProps = state => (
     categorySelected: state.RootReducer.categorySelected
     , categories: state.RootReducer.categories
     , posts: state.RootReducer.posts
+    , openDialogState: state.RootReducer.openDialogState
   }
 );
 
@@ -54,5 +61,6 @@ export default connect(mapStateToProps, {
   rootChangeCategoryAction
   , rootListCategoriesAction
   , rootListPostsAction
+  , rootOpenDialogAction
 })(RootView);
 

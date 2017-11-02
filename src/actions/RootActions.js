@@ -2,6 +2,7 @@ import {
     ROOT_CHANGE_CATEGORY
     , ROOT_LIST_CATEGORIES
     , ROOT_LIST_POSTS
+    , ROOT_ADD_NEW_POST
 } from './ActionsTypes';
 import * as Api from '../util/api';
 
@@ -15,7 +16,7 @@ export const rootChangeCategoryAction = category => {
 export const rootListCategoriesAction = () => {
     return dispatch => {
         Api.getAllCategories().then(categories => {
-            dispatch({ type: ROOT_LIST_CATEGORIES, payload:  categories  })
+            dispatch({ type: ROOT_LIST_CATEGORIES, payload: categories })
         });
     }
 }
@@ -25,5 +26,12 @@ export const rootListPostsAction = () => {
         Api.getAllPosts().then(posts => {
             dispatch({ type: ROOT_LIST_POSTS, payload: posts })
         });
+    }
+}
+
+export const rootOpenDialogAction = (openDialogState) => {
+    return {
+        type: ROOT_ADD_NEW_POST
+        , payload: openDialogState
     }
 }
