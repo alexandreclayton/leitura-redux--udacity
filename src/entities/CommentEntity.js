@@ -1,10 +1,10 @@
 export const CommentEntity = {
-    id,
-    parentId,
-    timestamp,
-    body,
-    author,
-    voteScore,
-    deleted,
-    parentDeleted
+    id: '',
+    parentId: '',
+    timestamp: 0,
+    body: '',
+    author: '',
+    voteScore: 1,
+    deleted: '',
+    parentDeleted: ''
 }

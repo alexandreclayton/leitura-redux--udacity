@@ -5,9 +5,11 @@ import {
 } from 'material-ui';
 import * as Styles from '../styles';
 
-export const Categories = ({ categories, categorySelected, handleChange, floatingLabelText }) => (
+export const Categories = ({ categories, categorySelected, handleChange, floatingLabelText, name }) => (
     <SelectField
-        labelStyle={Styles.MenuNavTopStyle.DropDownMenu_Color}
+        name={name}
+        style={Styles.MenuNavTopStyle.Size}
+        labelStyle={(!name ? Styles.MenuNavTopStyle.Color : null)}
         floatingLabelText={floatingLabelText}
         maxHeight={300}
         autoWidth={true}

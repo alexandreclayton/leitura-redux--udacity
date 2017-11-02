@@ -1,10 +1,10 @@
 export const PostEntity = {
-    id,
-    timestamp,
-    title,
-    body,
-    author,
-    category,
-    voteScore,
-    deleted
+    id: '',
+    timestamp: 0,
+    title: '',
+    body: '',
+    author: '',
+    category: '',
+    voteScore: 1,
+    deleted: ''
 }

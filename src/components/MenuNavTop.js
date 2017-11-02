@@ -4,7 +4,7 @@ import * as Styles from '../styles';
 
 export const MenuNavTop = ({ categories, categorySelected, handleChange }) => (
     <div>
-        <label style={Styles.MenuNavTopStyle.DropDownMenu_Label}>Cetegorias:</label>
+        <label style={Styles.MenuNavTopStyle.Label}>Cetegorias:</label>
         <Categories
             categories={categories}
             categorySelected={categorySelected}

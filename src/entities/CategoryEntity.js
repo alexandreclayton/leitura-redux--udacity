@@ -1,4 +1,4 @@
 export const CategoryEntity = {
-    name,
-    path
+    name: '',
+    path: ''
 }
