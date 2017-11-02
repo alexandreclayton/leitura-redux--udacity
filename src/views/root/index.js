@@ -14,6 +14,8 @@ import {
   , rootOpenDialogAction
 } from '../../actions/RootActions';
 
+import PostFormView from '../../views/post';
+
 // Components
 import { MenuNavTop, ListPosts } from '../../components';
 
@@ -43,6 +45,7 @@ class RootView extends Component {
           <ContentAdd />
         </FloatingActionButton>
         <ListPosts posts={this.props.posts} />
+        <PostFormView />
       </div>
     );
   }

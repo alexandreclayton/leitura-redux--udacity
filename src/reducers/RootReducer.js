@@ -2,7 +2,7 @@ import {
     ROOT_CHANGE_CATEGORY
     , ROOT_LIST_CATEGORIES
     , ROOT_LIST_POSTS
-    , ROOT_ADD_NEW_POST
+    , ROOT_DIALOG_POST_FORM
 } from '../actions/ActionsTypes';
 
 const INITIAL_STATE = {
@@ -20,7 +20,7 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, categories: action.payload }
         case ROOT_LIST_POSTS:
             return { ...state, posts: action.payload }
-        case ROOT_ADD_NEW_POST:
+        case ROOT_DIALOG_POST_FORM:
             return { ...state, openDialogState: action.payload }
         default:
             return state;

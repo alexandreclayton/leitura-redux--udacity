@@ -2,7 +2,7 @@ import {
     ROOT_CHANGE_CATEGORY
     , ROOT_LIST_CATEGORIES
     , ROOT_LIST_POSTS
-    , ROOT_ADD_NEW_POST
+    , ROOT_DIALOG_POST_FORM
 } from './ActionsTypes';
 import * as Api from '../util/api';
 
@@ -31,7 +31,7 @@ export const rootListPostsAction = () => {
 
 export const rootOpenDialogAction = (openDialogState) => {
     return {
-        type: ROOT_ADD_NEW_POST
+        type: ROOT_DIALOG_POST_FORM
         , payload: openDialogState
     }
 }
