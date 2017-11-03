@@ -11,11 +11,13 @@ const headers = {
     'Authorization': token
 }
 
+// Category
 export const getAllCategories = () =>
     fetch(`${api}/categories`, { headers })
         .then(res => res.json())
         .then(data => data.categories)
 
+// Post
 export const getPostsByCategory = (category) =>
     fetch(`${api}/${category}/posts`, { headers })
         .then(res => res.json())
@@ -28,6 +30,17 @@ export const getPostsDetail = (post_id) =>
     fetch(`${api}/posts/${post_id}`, { headers })
         .then(res => res.json())
 
+export const savePost = (PostEntity) =>
+    fetch(`${api}/posts`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(PostEntity)
+    }).then(res => res.json())
+
+// Comment
 export const getAllCommentsByPosts = (post_id) =>
     fetch(`${api}/posts/${post_id}/comments`, { headers })
         .then(res => res.json())

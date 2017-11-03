@@ -5,6 +5,6 @@ export const CommentEntity = {
     body: '',
     author: '',
     voteScore: 1,
-    deleted: '',
-    parentDeleted: ''
+    deleted: false,
+    parentDeleted: false
 }

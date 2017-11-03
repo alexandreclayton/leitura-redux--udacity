@@ -6,5 +6,5 @@ export const PostEntity = {
     author: '',
     category: '',
     voteScore: 1,
-    deleted: ''
+    deleted: false
 }

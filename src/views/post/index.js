@@ -16,6 +16,7 @@ import {
 import {
     postHandleChangeAction
     , postChangeCategoryAction
+    , postFormSaveAction
 } from '../../actions/PostActions';
 
 class PostFormView extends Component {
@@ -36,7 +37,7 @@ class PostFormView extends Component {
                 label="Save"
                 primary={true}
                 keyboardFocused={true}
-                onClick={() => this.props.rootOpenDialogAction(false)}
+                onClick={() => this.props.postFormSaveAction(PostEntity)}
             />,
         ];
 
@@ -118,4 +119,5 @@ export default connect(mapStateToProps, {
     rootOpenDialogAction
     , postHandleChangeAction
     , postChangeCategoryAction
+    , postFormSaveAction
 })(PostFormView);

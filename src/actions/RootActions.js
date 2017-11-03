@@ -24,6 +24,7 @@ export const rootListCategoriesAction = () => {
 export const rootListPostsAction = () => {
     return dispatch => {
         Api.getAllPosts().then(posts => {
+            console.log(posts);
             dispatch({ type: ROOT_LIST_POSTS, payload: posts })
         });
     }
