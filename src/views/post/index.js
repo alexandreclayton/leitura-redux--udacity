@@ -26,7 +26,7 @@ class PostFormView extends Component {
     }
 
     render() {
-        let { PostEntity } = this.props;
+        let { PostEntity, fieldsErros } = this.props;
         const actions = [
             <FlatButton
                 label="Cancel"
@@ -63,6 +63,7 @@ class PostFormView extends Component {
                             floatingLabelFixed={true}
                             fullWidth={true}
                             value={PostEntity.title}
+                            errorText={fieldsErros.find((text)=>text === "title") ? "This field is required" : ""}
                             onChange={this.props.postHandleChangeAction}
                         /><br />
                         <TextField
@@ -72,6 +73,7 @@ class PostFormView extends Component {
                             floatingLabelFixed={true}
                             multiLine={true}
                             fullWidth={true}
+                            errorText={fieldsErros.find((text)=>text === "body") ? "This field is required" : ""}
                             value={PostEntity.body}
                             onChange={this.props.postHandleChangeAction}
                         /><br />
@@ -82,6 +84,7 @@ class PostFormView extends Component {
                             floatingLabelFixed={true}
                             fullWidth={true}
                             value={PostEntity.author}
+                            errorText={fieldsErros.find((text)=>text === "author") ? "This field is required" : ""}
                             onChange={this.props.postHandleChangeAction}
                         /><br />
                         <Categories
@@ -89,8 +92,8 @@ class PostFormView extends Component {
                             categories={this.props.categories}
                             floatingLabelText="Categories"
                             categorySelected={PostEntity.category}
+                            errorText={fieldsErros.find((text)=>text === "category") ? "This field is required" : ""}
                             handleChange={this.props.postChangeCategoryAction}
-                            fullWidth={true}
                         /><br />
                         <TextField
                             disabled={true}
@@ -112,6 +115,7 @@ const mapStateToProps = state => (
         openDialogState: state.RootReducer.openDialogState
         , categories: state.RootReducer.categories
         , PostEntity: state.PostReducer.PostEntity
+        , fieldsErros: state.PostReducer.fieldsErros
     }
 );
 

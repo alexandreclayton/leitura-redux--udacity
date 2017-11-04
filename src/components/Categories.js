@@ -3,17 +3,17 @@ import {
     SelectField,
     MenuItem
 } from 'material-ui';
-import * as Styles from '../styles';
 
-export const Categories = ({ categories, categorySelected, handleChange, floatingLabelText, name }) => (
+export const Categories = ({ categories, categorySelected, handleChange, floatingLabelText, name, style, labelStyle, errorText }) => (
     <SelectField
         name={name}
-        style={Styles.MenuNavTopStyle.Size}
-        labelStyle={(!name ? Styles.MenuNavTopStyle.Color : null)}
+        style={style}
+        labelStyle={labelStyle}
         floatingLabelText={floatingLabelText}
         maxHeight={300}
         autoWidth={true}
         value={categorySelected}
+        errorText={errorText}
         onChange={(event, index, categorySelected) => handleChange(categorySelected)}>
         <MenuItem value="all" key="all" primaryText="Select" />
         {categories.map(i => (<MenuItem value={i.path} key={i.path} primaryText={i.name} />))}

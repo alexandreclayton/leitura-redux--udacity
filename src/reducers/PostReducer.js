@@ -2,11 +2,13 @@ import {
     POST_FORM_SAVE
     , POST_HANDLE_CHANGE
     , POST_CHANGE_CATEGORY
+    , POST_VALID_FORM
 } from '../actions/ActionsTypes';
 import { PostEntity } from '../entities';
 
 const INITIAL_STATE = {
     PostEntity
+    , fieldsErros: []
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -16,7 +18,9 @@ export default (state = INITIAL_STATE, action) => {
         case POST_CHANGE_CATEGORY:
             return { ...state, PostEntity: { ...state.PostEntity, category: action.payload } }
         case POST_FORM_SAVE:
-            return { ...state, PostEntity: action.payload }
+            return { ...state, PostEntity }
+        case POST_VALID_FORM:
+            return { ...state, fieldsErros: action.payload }
         default:
             return state;
     }

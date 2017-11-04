@@ -8,7 +8,9 @@ export const MenuNavTop = ({ categories, categorySelected, handleChange }) => (
         <Categories
             categories={categories}
             categorySelected={categorySelected}
-            handleChange={handleChange} />
+            handleChange={handleChange} 
+            style={Styles.MenuNavTopStyle.Size}
+            labelStyle={Styles.MenuNavTopStyle.Color}/>
     </div >
 );
 
