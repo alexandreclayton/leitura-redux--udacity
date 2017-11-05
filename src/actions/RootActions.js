@@ -1,3 +1,4 @@
+import sortBy from 'sort-by'
 import {
     ROOT_CHANGE_CATEGORY
     , ROOT_LIST_CATEGORIES
@@ -21,10 +22,10 @@ export const rootListCategoriesAction = () => {
     }
 }
 
-export const rootListPostsAction = () => {
+export const rootListPostsAction = (orderField) => {
     return dispatch => {
         Api.getAllPosts().then(posts => {
-            dispatch({ type: ROOT_LIST_POSTS, payload: posts })
+            dispatch({ type: ROOT_LIST_POSTS, payload: posts.sort(sortBy(orderField)) })
         });
     }
 }

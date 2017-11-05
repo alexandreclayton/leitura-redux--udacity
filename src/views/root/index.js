@@ -21,7 +21,7 @@ import { MenuNavTop, ListPosts } from '../../components';
 class RootView extends Component {
   componentDidMount() {
     this.props.rootListCategoriesAction();
-    this.props.rootListPostsAction();
+    this.props.rootListPostsAction('-voteScore');
   }
   render() {
     return (
