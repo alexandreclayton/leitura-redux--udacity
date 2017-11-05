@@ -96,14 +96,6 @@ class PostFormView extends Component {
                             errorText={fieldsErros.find((text)=>text === "category") ? "This field is required" : ""}
                             handleChange={this.props.postChangeCategoryAction}
                         /><br />
-                        <TextField
-                            disabled={true}
-                            hintText="Vote Score"
-                            floatingLabelText="Vote Score"
-                            floatingLabelFixed={true}
-                            fullWidth={true}
-                            value={PostEntity.voteScore}
-                        /><br />
                     </div>
                 </Dialog>
             </div>
