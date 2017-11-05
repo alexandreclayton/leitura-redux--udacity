@@ -1,24 +1,25 @@
 import uuid from 'uuid';
 import moment from 'moment';
 import {
-    POST_HANDLE_CHANGE
+    ROOT_UPDATE_POSTS
+    , ROOT_DIALOG_POST_FORM
+    , POST_HANDLE_CHANGE
     , POST_CHANGE_CATEGORY
     , POST_FORM_SAVE
-    , ROOT_UPDATE_POSTS
     , POST_VALID_FORM
+    , POST_CLEAN_FORM
 } from './ActionsTypes';
 
 import * as Api from '../util/api';
 
-
 export const postHandleChangeAction = (event) => {
-    console.log(event.target.errorText);
     return {
         type: POST_HANDLE_CHANGE
         , field: event.target.name
         , payload: event.target.value
     }
 }
+
 export const postChangeCategoryAction = category => {
     return {
         type: POST_CHANGE_CATEGORY
@@ -28,24 +29,34 @@ export const postChangeCategoryAction = category => {
 
 export const postFormSaveAction = (PostEntity) => {
     let fieldsErros = [];
+    let newPost = { ...PostEntity };
+    // init new post
+    newPost.id = uuid.v1();
+    newPost.timestamp = moment().valueOf();
     // Valid form
-    for (let prop in PostEntity) {
-        if (PostEntity[prop] === null || PostEntity[prop] === "") {
+    for (let prop in newPost) {
+        if (newPost[prop] === null || newPost[prop] === "") {
             fieldsErros.push(prop);
-            debugger;
         }
     }
     // Enviar para servidor
     return dispatch => {
         if (fieldsErros.length === 0) {
-            PostEntity.id = uuid.v1();
-            PostEntity.timestamp = moment().valueOf();
-            Api.savePost(PostEntity).then(post => {
-                dispatch({ type: POST_FORM_SAVE, payload: PostEntity });
+            Api.savePost(newPost).then(post => {
+                dispatch({ type: POST_FORM_SAVE, payload: newPost });
                 dispatch({ type: ROOT_UPDATE_POSTS, payload: post });
+                dispatch({ type: ROOT_DIALOG_POST_FORM, payload: false });
+                dispatch({ type: POST_CLEAN_FORM });
             });
         } else {
             dispatch({ type: POST_VALID_FORM, payload: fieldsErros });
         }
+    }
+}
+
+export const postFormCancelAction = () => {
+    return dispatch => {
+        dispatch({ type: POST_CLEAN_FORM });
+        dispatch({ type: ROOT_DIALOG_POST_FORM, payload: false });
     }
 }

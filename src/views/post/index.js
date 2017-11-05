@@ -17,6 +17,7 @@ import {
     postHandleChangeAction
     , postChangeCategoryAction
     , postFormSaveAction
+    , postFormCancelAction
 } from '../../actions/PostActions';
 
 class PostFormView extends Component {
@@ -31,7 +32,7 @@ class PostFormView extends Component {
             <FlatButton
                 label="Cancel"
                 primary={false}
-                onClick={() => this.props.rootOpenDialogAction(false)}
+                onClick={() => this.props.postFormCancelAction()}
             />,
             <FlatButton
                 label="Save"
@@ -124,4 +125,5 @@ export default connect(mapStateToProps, {
     , postHandleChangeAction
     , postChangeCategoryAction
     , postFormSaveAction
+    , postFormCancelAction
 })(PostFormView);
