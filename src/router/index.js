@@ -11,6 +11,9 @@ class RouterApp extends Component {
                 <Route exact path="/" render={() => (
                     <RootView />
                 )} />
+                <Route path="/post/:id" render={() => (
+                    <RootView />
+                )} />
             </div>
         )
     }
