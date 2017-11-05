@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import RootView from '../views/root';
+import PostDetailView from '../views/post/PostDetailView';
 
 
 class RouterApp extends Component {
@@ -12,7 +13,7 @@ class RouterApp extends Component {
                     <RootView />
                 )} />
                 <Route path="/post/:id" render={() => (
-                    <RootView />
+                    <PostDetailView />
                 )} />
             </div>
         )
