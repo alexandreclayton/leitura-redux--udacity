@@ -1,13 +1,12 @@
 export const Label = {
     display: 'inline-block',
-    marginBottom: 16,
+    marginBottom: 20,
     fontSize: 20,
     fontFamily: 'Roboto, sans-serif',
     position: 'relative',
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
-    color: 'white',
     paddingRight: 10
 }
 

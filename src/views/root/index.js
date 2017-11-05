@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import {
   AppBar
+  , IconButton, IconMenu, MenuItem, DropDownMenu, SelectField
 } from 'material-ui';
 
+import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar';
+
+import Sort from 'material-ui/svg-icons/content/sort';
 
 import { connect } from 'react-redux';
 
@@ -16,7 +20,7 @@ import {
 import PostFormView from '../../views/post';
 
 // Components
-import { MenuNavTop, ListPosts } from '../../components';
+import { MenuNavTop, ListPosts, Categories } from '../../components';
 
 class RootView extends Component {
   componentDidMount() {
@@ -26,13 +30,23 @@ class RootView extends Component {
   render() {
     return (
       <div>
-        <AppBar title="Leitura"
-          iconElementRight={<MenuNavTop
-            categories={this.props.categories}
-            categorySelected={this.props.categorySelected}
-            handleChange={this.props.rootChangeCategoryAction} />}>
-        </AppBar>
-        
+        <AppBar title="Leitura"/>
+        <Toolbar>
+          <ToolbarGroup>
+          <ToolbarTitle text="Categories:" />
+            <Categories
+              categories={this.props.categories}
+              categorySelected={this.props.categorySelected}
+              handleChange={this.props.rootChangeCategoryAction} />
+          </ToolbarGroup>
+          <ToolbarGroup>
+          <ToolbarTitle text="Sort:" />
+          <SelectField value={'-voteScore'} onChange={null}>
+            <MenuItem value={'-voteScore'} primaryText="Vote Score" />
+            <MenuItem value={'-timestamp'} primaryText="Date" />
+          </SelectField>
+          </ToolbarGroup>
+        </Toolbar>
         <ListPosts posts={this.props.posts} />
         <PostFormView />
       </div>

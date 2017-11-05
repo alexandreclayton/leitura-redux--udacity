@@ -5,16 +5,19 @@ import { createStore, applyMiddleware } from 'redux'
 import reducers from './reducers'
 import { Provider } from 'react-redux'
 import ReduxThunk from 'redux-thunk';
+import { BrowserRouter } from 'react-router-dom'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import RootView from './views/root';
+import RouterApp from './router';
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
     <Provider store={createStore(reducers, {}, applyMiddleware(ReduxThunk))}>
         <MuiThemeProvider>
-            <RootView />
+            <BrowserRouter>
+                <RouterApp />
+            </BrowserRouter>
         </MuiThemeProvider>
     </Provider>
     , document.getElementById('root'));
