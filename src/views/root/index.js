@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import {
-  AppBar
-} from 'material-ui';
 import { connect } from 'react-redux';
 import {
   rootChangeCategoryAction
@@ -10,7 +7,7 @@ import {
   , rootListPostsAction
   , rootOpenDialogAction
 } from '../../actions/RootActions';
-import PostFormView from '../../views/post';
+import PostFormView from '../../views/post/PostFormView';
 import { ListPosts, MenuNavTop } from '../../components';
 
 class RootView extends Component {
@@ -22,8 +19,8 @@ class RootView extends Component {
     let { posts, categories, categorySelected, sortSelected } = this.props;
     return (
       <div>
-        <AppBar title="Leitura" />
-        <MenuNavTop categories={categories}
+        <MenuNavTop title="Leitura"
+          categories={categories}
           categorySelected={categorySelected}
           sortSelected={sortSelected}
           changeCategory={this.props.rootChangeCategoryAction}
