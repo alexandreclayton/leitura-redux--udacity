@@ -1,6 +1,7 @@
-import sortBy from 'sort-by'
+
 import {
     ROOT_CHANGE_CATEGORY
+    , ROOT_CHANGE_SORT
     , ROOT_LIST_CATEGORIES
     , ROOT_LIST_POSTS
     , ROOT_DIALOG_POST_FORM
@@ -8,9 +9,16 @@ import {
 import * as Api from '../util/api';
 
 export const rootChangeCategoryAction = category => {
-    return {
-        type: ROOT_CHANGE_CATEGORY
-        , payload: category
+    return dispatch => {
+        dispatch({ type: ROOT_CHANGE_CATEGORY, payload: category });
+        dispatch(rootListPostsAction());
+    }
+}
+
+export const rootChangeSortAction = sort => {
+    return dispatch => {
+        dispatch({ type: ROOT_CHANGE_SORT, payload: sort });
+        dispatch(rootListPostsAction());
     }
 }
 
@@ -22,10 +30,10 @@ export const rootListCategoriesAction = () => {
     }
 }
 
-export const rootListPostsAction = (orderField) => {
+export const rootListPostsAction = () => {
     return dispatch => {
         Api.getAllPosts().then(posts => {
-            dispatch({ type: ROOT_LIST_POSTS, payload: posts.sort(sortBy(orderField)) })
+            dispatch({ type: ROOT_LIST_POSTS, payload: posts })
         });
     }
 }
