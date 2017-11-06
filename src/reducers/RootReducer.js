@@ -26,7 +26,7 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, categories: action.payload }
         case ROOT_LIST_POSTS:
             let { categorySelected, sortSelected } = state;
-            let posts = action.payload;
+            let posts = action.payload.filter(p => !p.deleted);
             let newPosts = posts.sort(sortBy(sortSelected));
             if (categorySelected !== 'all') {
                 newPosts = newPosts.filter(p => p.category === categorySelected);
