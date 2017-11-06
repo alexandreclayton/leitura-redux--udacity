@@ -8,7 +8,7 @@ import {
 import ActionGrade from 'material-ui/svg-icons/action/grade';
 import EditorInsertInvitation from 'material-ui/svg-icons/editor/insert-invitation';
 import moment from 'moment';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 import * as Styles from '../styles';
 

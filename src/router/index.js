@@ -12,9 +12,7 @@ class RouterApp extends Component {
                 <Route exact path="/" render={() => (
                     <RootView />
                 )} />
-                <Route path="/post/:id" render={() => (
-                    <PostDetailView />
-                )} />
+                <Route path="/post/:id" component={PostDetailView} />
             </div>
         )
     }
