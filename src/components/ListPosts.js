@@ -8,13 +8,14 @@ import {
 import ActionGrade from 'material-ui/svg-icons/action/grade';
 import EditorInsertInvitation from 'material-ui/svg-icons/editor/insert-invitation';
 import moment from 'moment';
+import { Link } from 'react-router-dom'
 
 import * as Styles from '../styles';
 
 export const ListPosts = ({ posts }) => (
     <List>
         {posts.map(p => (
-            <div key={p.id}>
+            <Link key={p.id} to={`/post/${p.id}`}>
                 <ListItem
                     leftIcon={<Badge
                         badgeContent={p.voteScore}
@@ -30,6 +31,6 @@ export const ListPosts = ({ posts }) => (
                     secondaryTextLines={2}
                 />
                 <Divider inset={true} />
-            </div>))}
+            </Link>))}
     </List>
 );
