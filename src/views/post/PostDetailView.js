@@ -8,10 +8,12 @@ import ActionThumbDown from 'material-ui/svg-icons/action/thumb-down';
 import ActionDelete from 'material-ui/svg-icons/action/delete';
 import EditorModeEdit from 'material-ui/svg-icons/editor/mode-edit';
 import HardwareKeyboardArrowLeft from 'material-ui/svg-icons/hardware/keyboard-arrow-left';
+import { Comment } from '../../components';
 
 class PostFormView extends Component {
     render() {
         let ID = this.props.match.params.id;
+        let { title, body, author, voteScore, date } = this.props;
         return (<div>
             <AppBar title="Detail"
                 iconElementLeft={
@@ -20,7 +22,7 @@ class PostFormView extends Component {
                     </Link>} />
             <Toolbar>
                 <ToolbarGroup firstChild={false}>
-                    <ToolbarTitle text="Vote Score: 100" />
+                    <ToolbarTitle text={`Vote Score: ${voteScore}`} />
                 </ToolbarGroup>
                 <ToolbarGroup>
                     <IconButton touch={true}>
@@ -31,13 +33,9 @@ class PostFormView extends Component {
                     </IconButton>
                 </ToolbarGroup>
             </Toolbar>
-            <h1>TITULO TESTE</h1>
-                <div id="content">
-                    dad asdasdasda
-                d asdasdasdasdas
-            </div>
-            
-            <small>By: Alexandre clayton, Date: 06/11/2017</small><br />
+            <h1>{title}</h1>
+            <div id="content">{body}</div>
+            <small>By: {author}, Date: {date}</small><br />
             <IconButton touch={true}>
                 <ActionThumbUp />
             </IconButton>
@@ -46,82 +44,7 @@ class PostFormView extends Component {
             </IconButton>
             <div id="comments">
                 <h2>Comments</h2>
-                <div id="comment">
-                    <div class="author">Alexandre Sette</div>
-                    <div class="body">AJsdhjakhdja  asdgajsgdhjad as asjdhjakhadjsh as djashdja </div>
-                    <div class="Vote Score">Vote Score: 2</div>
-                    <div>
-                        <IconButton touch={true}>
-                            <ActionThumbUp />
-                        </IconButton>
-                        <IconButton touch={true}>
-                            <ActionThumbDown />
-                        </IconButton>
-                        <IconButton touch={true}>
-                            <EditorModeEdit />
-                        </IconButton>
-                        <IconButton touch={true}>
-                            <ActionDelete />
-                        </IconButton>
-                    </div>
-                </div>
-                <div id="comment">
-                    <div class="author">Alexandre Sette</div>
-                    <div class="body">AJsdhjakhdja  asdgajsgdhjad as asjdhjakhadjsh as djashdja </div>
-                    <div class="Vote Score">Vote Score: 2</div>
-                    <div>
-                        <IconButton touch={true}>
-                            <ActionThumbUp />
-                        </IconButton>
-                        <IconButton touch={true}>
-                            <ActionThumbDown />
-                        </IconButton>
-                        <IconButton touch={true}>
-                            <EditorModeEdit />
-                        </IconButton>
-                        <IconButton touch={true}>
-                            <ActionDelete />
-                        </IconButton>
-                    </div>
-                </div>
-                <div id="comment">
-                    <div class="author">Alexandre Sette</div>
-                    <div class="body">AJsdhjakhdja  asdgajsgdhjad as asjdhjakhadjsh as djashdja </div>
-                    <div class="Vote Score">Vote Score: 2</div>
-                    <div>
-                        <IconButton touch={true}>
-                            <ActionThumbUp />
-                        </IconButton>
-                        <IconButton touch={true}>
-                            <ActionThumbDown />
-                        </IconButton>
-                        <IconButton touch={true}>
-                            <EditorModeEdit />
-                        </IconButton>
-                        <IconButton touch={true}>
-                            <ActionDelete />
-                        </IconButton>
-                    </div>
-                </div>
-                <div id="comment">
-                    <div class="author">Alexandre Sette</div>
-                    <div class="body">AJsdhjakhdja  asdgajsgdhjad as asjdhjakhadjsh as djashdja </div>
-                    <div class="Vote Score">Vote Score: 2</div>
-                    <div>
-                        <IconButton touch={true}>
-                            <ActionThumbUp />
-                        </IconButton>
-                        <IconButton touch={true}>
-                            <ActionThumbDown />
-                        </IconButton>
-                        <IconButton touch={true}>
-                            <EditorModeEdit />
-                        </IconButton>
-                        <IconButton touch={true}>
-                            <ActionDelete />
-                        </IconButton>
-                    </div>
-                </div>
+                <Comment author="Alexandre" body="asdasda asdas ds" voteScore="1" />
             </div>
         </div>)
     }
