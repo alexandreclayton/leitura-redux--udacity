@@ -1,19 +1,34 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { AppBar, Toolbar, ToolbarTitle, ToolbarGroup, RaisedButton } from 'material-ui';
+import {
+    getPostDetailAction
+    , getAllCommentsByPostId
+} from '../../actions/PostDatailActions';
+import moment from 'moment';
+import { AppBar, Toolbar, ToolbarTitle, ToolbarGroup } from 'material-ui';
 import IconButton from 'material-ui/IconButton';
 import { Link } from 'react-router-dom';
+import ActionNoteAdd from 'material-ui/svg-icons/action/note-add';
 import ActionThumbUp from 'material-ui/svg-icons/action/thumb-up';
 import ActionThumbDown from 'material-ui/svg-icons/action/thumb-down';
 import ActionDelete from 'material-ui/svg-icons/action/delete';
 import EditorModeEdit from 'material-ui/svg-icons/editor/mode-edit';
 import HardwareKeyboardArrowLeft from 'material-ui/svg-icons/hardware/keyboard-arrow-left';
+import { red500, blue500, green500 } from 'material-ui/styles/colors';
 import { Comment } from '../../components';
 
-class PostFormView extends Component {
+
+class PostDetailFormView extends Component {
+
+    componentDidMount() {
+        let Id = this.props.match.params.id;
+        this.props.getPostDetailAction(Id);
+        this.props.getAllCommentsByPostId(Id);
+    }
+
     render() {
-        let ID = this.props.match.params.id;
-        let { title, body, author, voteScore, date } = this.props;
+        let { PostEntity, comments } = this.props;
+        let { title, body, author, voteScore, timestamp } = PostEntity;
         return (<div>
             <AppBar title="Detail"
                 iconElementLeft={
@@ -25,29 +40,47 @@ class PostFormView extends Component {
                     <ToolbarTitle text={`Vote Score: ${voteScore}`} />
                 </ToolbarGroup>
                 <ToolbarGroup>
-                    <IconButton touch={true}>
+                    <IconButton touch={true} tooltip="Edit Post">
                         <EditorModeEdit />
                     </IconButton>
-                    <IconButton touch={true}>
+                    <IconButton touch={true} tooltip="Delete Post">
                         <ActionDelete />
                     </IconButton>
                 </ToolbarGroup>
             </Toolbar>
             <h1>{title}</h1>
             <div id="content">{body}</div>
-            <small>By: {author}, Date: {date}</small><br />
-            <IconButton touch={true}>
-                <ActionThumbUp />
+            <small>By: {author}, Date: {moment(timestamp).format("DD/MM/YY HH:mm")}</small><br />
+            <IconButton touch={true} tooltip="Vote UP">
+                <ActionThumbUp color={green500} />
             </IconButton>
-            <IconButton touch={true}>
-                <ActionThumbDown />
+            <IconButton touch={true} tooltip="Vote DOWN">
+                <ActionThumbDown color={red500} />
             </IconButton>
             <div id="comments">
-                <h2>Comments</h2>
-                <Comment author="Alexandre" body="asdasda asdas ds" voteScore="1" />
+                <h2>Comments
+                    <IconButton touch={true} tooltip="Add new comment" >
+                        <ActionNoteAdd color={blue500} />
+                    </IconButton>
+                </h2>
+                {comments.map(c => (<Comment key={c.id}
+                    author={c.author}
+                    body={c.body}
+                    voteScore={c.voteScore}
+                    timestamp={c.timestamp} />))}
             </div>
         </div>)
     }
 }
 
-export default PostFormView
+const mapStateToProps = state => (
+    {
+        PostEntity: state.PostDetailReducer.PostEntity
+        , comments: state.PostDetailReducer.comments
+    }
+);
+
+export default connect(mapStateToProps, {
+    getPostDetailAction
+    , getAllCommentsByPostId
+})(PostDetailFormView);

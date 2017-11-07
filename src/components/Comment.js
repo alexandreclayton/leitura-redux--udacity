@@ -4,23 +4,25 @@ import ActionThumbUp from 'material-ui/svg-icons/action/thumb-up';
 import ActionThumbDown from 'material-ui/svg-icons/action/thumb-down';
 import EditorModeEdit from 'material-ui/svg-icons/editor/mode-edit';
 import ActionDelete from 'material-ui/svg-icons/action/delete';
+import {red500, green500} from 'material-ui/styles/colors';
+import moment from 'moment';
 
-export const Comment = ({ author, body, voteScore }) => (
-    <div class="comment">
-        <div class="author">{author}</div>
-        <div class="body">{body}</div>
-        <div class="Vote Score">Vote Score: {voteScore}</div>
+export const Comment = ({ author, body, voteScore, timestamp }) => (
+    <div>
+        <strong>{author},</strong>
+        <p>{body}</p>
+        <small>Vote Score: {voteScore}, {moment(timestamp).format("DD/MM/YY HH:mm")}</small>        
         <div>
-            <IconButton touch={true}>
-                <ActionThumbUp />
+            <IconButton touch={true} tooltip="Vote UP">
+                <ActionThumbUp color={green500} />
             </IconButton>
-            <IconButton touch={true}>
-                <ActionThumbDown />
+            <IconButton touch={true} tooltip="Vote DOWN">
+                <ActionThumbDown color={red500} />
             </IconButton>
-            <IconButton touch={true}>
+            <IconButton touch={true} tooltip="Edit Comment">
                 <EditorModeEdit />
             </IconButton>
-            <IconButton touch={true}>
+            <IconButton touch={true} tooltip="Delete Comment">
                 <ActionDelete />
             </IconButton>
         </div>

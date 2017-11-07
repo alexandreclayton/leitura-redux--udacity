@@ -26,8 +26,8 @@ export const getAllPosts = () =>
     fetch(`${api}/posts`, { headers })
         .then(res => res.json())
 
-export const getPostsDetail = (post_id) =>
-    fetch(`${api}/posts/${post_id}`, { headers })
+export const getPostsDetail = (Id) =>
+    fetch(`${api}/posts/${Id}`, { headers })
         .then(res => res.json())
 
 export const savePost = (PostEntity) =>
@@ -41,7 +41,7 @@ export const savePost = (PostEntity) =>
     }).then(res => res.json())
 
 // Comment
-export const getAllCommentsByPosts = (post_id) =>
+export const getAllCommentsByPostId = (post_id) =>
     fetch(`${api}/posts/${post_id}/comments`, { headers })
         .then(res => res.json())
 
