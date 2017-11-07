@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import {
     getPostDetailAction
     , getAllCommentsByPostId
-} from '../../actions/PostDatailActions';
+    , postDetailOpenDialogCommentAction
+} from '../../actions/PostDetailActions';
 import moment from 'moment';
 import { AppBar, Toolbar, ToolbarTitle, ToolbarGroup } from 'material-ui';
 import IconButton from 'material-ui/IconButton';
@@ -16,7 +17,7 @@ import EditorModeEdit from 'material-ui/svg-icons/editor/mode-edit';
 import HardwareKeyboardArrowLeft from 'material-ui/svg-icons/hardware/keyboard-arrow-left';
 import { red500, blue500, green500 } from 'material-ui/styles/colors';
 import { Comment } from '../../components';
-
+import CommentFromView from '../comment/CommentFormView';
 
 class PostDetailFormView extends Component {
 
@@ -59,7 +60,9 @@ class PostDetailFormView extends Component {
             </IconButton>
             <div id="comments">
                 <h2>Comments
-                    <IconButton touch={true} tooltip="Add new comment" >
+                    <IconButton touch={true}
+                        tooltip="Add new comment"
+                        onClick={() => this.props.postDetailOpenDialogCommentAction(true)} >
                         <ActionNoteAdd color={blue500} />
                     </IconButton>
                 </h2>
@@ -69,6 +72,7 @@ class PostDetailFormView extends Component {
                     voteScore={c.voteScore}
                     timestamp={c.timestamp} />))}
             </div>
+            <CommentFromView />
         </div>)
     }
 }
@@ -83,4 +87,5 @@ const mapStateToProps = state => (
 export default connect(mapStateToProps, {
     getPostDetailAction
     , getAllCommentsByPostId
+    , postDetailOpenDialogCommentAction
 })(PostDetailFormView);

@@ -26,7 +26,7 @@ class PostFormView extends Component {
     }
 
     render() {
-        let { PostEntity, fieldsErros } = this.props;
+        let { PostEntity, fieldsErros, openDialogState } = this.props;
         const actions = [
             <FlatButton
                 label="Cancel"
@@ -52,7 +52,7 @@ class PostFormView extends Component {
                     title={!PostEntity.id ? "New Post" : "Edit Post"}
                     actions={actions}
                     modal={true}
-                    open={this.props.openDialogState}
+                    open={openDialogState}
                     onRequestClose={() => this.props.rootOpenDialogAction(false)}
                     autoScrollBodyContent={true}>
                     <div>
