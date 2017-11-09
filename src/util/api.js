@@ -40,6 +40,22 @@ export const savePost = (PostEntity) =>
         body: JSON.stringify(PostEntity)
     }).then(res => res.json());
 
+export const editPost = (PostEntity) =>
+    fetch(`${api}/posts/${PostEntity.id}`, {
+        method: 'PUT',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(PostEntity)
+    }).then(res => res.json());
+
+export const removePost = (post_id) =>
+    fetch(`${api}/posts/${post_id}`, {
+        method: 'DELETE',
+        headers
+    }).then(res => res.json());
+
 // Comment
 export const getAllCommentsByPostId = (post_id) =>
     fetch(`${api}/posts/${post_id}/comments`, { headers })
@@ -57,4 +73,20 @@ export const saveComment = (CommentEntity) =>
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(CommentEntity)
+    }).then(res => res.json());
+
+export const editComment = (CommentEntity) =>
+    fetch(`${api}/comments/${CommentEntity.id}`, {
+        method: 'PUT',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(CommentEntity)
+    }).then(res => res.json());
+
+export const deleteComment = (comment_id) =>
+    fetch(`${api}/comments/${comment_id}`, {
+        method: 'DELETE',
+        headers
     }).then(res => res.json());

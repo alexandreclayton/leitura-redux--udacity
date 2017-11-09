@@ -30,7 +30,7 @@ class CommentFormView extends Component {
                 label="Save"
                 primary={true}
                 keyboardFocused={true}
-                onClick={() => postDetailCommentAddAction(CommentEntity, PostEntity)}
+                onClick={() => this.props.postDetailCommentAddAction(CommentEntity, PostEntity)}
             />,
         ];
         return (

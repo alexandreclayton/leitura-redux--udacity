@@ -4,7 +4,11 @@ import {
     getPostDetailAction
     , getAllCommentsByPostId
     , postDetailOpenDialogCommentAction
+    , postDetailCommentRemoveAction
 } from '../../actions/PostDetailActions';
+import {
+    postRemove
+} from '../../actions/PostActions';
 import moment from 'moment';
 import { AppBar, Toolbar, ToolbarTitle, ToolbarGroup } from 'material-ui';
 import IconButton from 'material-ui/IconButton';
@@ -22,6 +26,7 @@ import CommentFromView from '../comment/CommentFormView';
 class PostDetailFormView extends Component {
 
     componentDidMount() {
+        console.log(this.props);
         let Id = this.props.match.params.id;
         this.props.getPostDetailAction(Id);
         this.props.getAllCommentsByPostId(Id);
@@ -44,7 +49,9 @@ class PostDetailFormView extends Component {
                     <IconButton touch={true} tooltip="Edit Post">
                         <EditorModeEdit />
                     </IconButton>
-                    <IconButton touch={true} tooltip="Delete Post">
+                    <IconButton touch={true}
+                        tooltip="Delete Post"
+                        onClick={() => this.props.postRemove(PostEntity.id, this.props.history)}>
                         <ActionDelete />
                     </IconButton>
                 </ToolbarGroup>
@@ -66,11 +73,15 @@ class PostDetailFormView extends Component {
                         <ActionNoteAdd color={blue500} />
                     </IconButton>
                 </h2>
-                {comments.map(c => (<Comment key={c.id}
+                {comments.map(c => (<Comment
+                    key={c.id}
+                    id={c.id}
                     author={c.author}
                     body={c.body}
                     voteScore={c.voteScore}
-                    timestamp={c.timestamp} />))}
+                    timestamp={c.timestamp}
+                    handleEditComment={() => alert}
+                    handleRemoveComment={this.props.postDetailCommentRemoveAction} />))}
             </div>
             <CommentFromView />
         </div>)
@@ -88,4 +99,6 @@ export default connect(mapStateToProps, {
     getPostDetailAction
     , getAllCommentsByPostId
     , postDetailOpenDialogCommentAction
+    , postDetailCommentRemoveAction
+    , postRemove
 })(PostDetailFormView);

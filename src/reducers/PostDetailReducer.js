@@ -5,6 +5,7 @@ import {
     , DETAIL_POST_HANDLE_CHANGE
     , DETAIL_GET_COMMENT
     , DETAIL_ADD_COMMENT
+    , DETAIL_REMOVE_COMMENT
     , DETAIL_COMMENT_FORM_CLEAN
 } from '../actions/ActionsTypes';
 import { PostEntity, CommentEntity } from '../entities';
@@ -30,7 +31,10 @@ export default (state = INITIAL_STATE, action) => {
         case DETAIL_GET_COMMENT:
             return { ...state, CommentEntity: { ...action.payload } }
         case DETAIL_ADD_COMMENT:
-            return { ...state, CommentEntity: { ...action.payload } }
+            return { ...state, comments: [...state.comments, action.payload] }
+        case DETAIL_REMOVE_COMMENT:
+            console.log(state.comments.filter(c => action.payload.id !== c.id));
+            return { ...state, comments: [...state.comments.filter(c => action.payload.id !== c.id)] }
         case DETAIL_COMMENT_FORM_CLEAN:
             return { ...state, CommentEntity, fieldsErros: [] }
         default:

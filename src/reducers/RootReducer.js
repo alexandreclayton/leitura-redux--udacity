@@ -6,6 +6,7 @@ import {
     , ROOT_LIST_POSTS
     , ROOT_DIALOG_POST_FORM
     , ROOT_UPDATE_POSTS
+    , POST_REMOVE
 } from '../actions/ActionsTypes';
 
 const INITIAL_STATE = {
@@ -36,6 +37,8 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, openDialogState: action.payload }
         case ROOT_UPDATE_POSTS:
             return { ...state, posts: [...state.posts, action.payload] }
+        case POST_REMOVE:
+            return { ...state, posts: [...state.posts.filter(p => action.payload !== p)] }
         default:
             return state;
     }
