@@ -1,7 +1,5 @@
 import uuid from 'uuid';
 import moment from 'moment';
-import { BrowserRouter as Router } from 'react-router-dom';
-
 import {
     ROOT_UPDATE_POSTS
     , ROOT_DIALOG_POST_FORM
@@ -12,8 +10,6 @@ import {
     , POST_CLEAN_FORM
     , POST_REMOVE
 } from './ActionsTypes';
-
-
 import * as Api from '../util/api';
 
 export const postHandleChangeAction = (event) => {
@@ -67,9 +63,11 @@ export const postFormCancelAction = () => {
 
 export const postRemove = (post_id, history) => {
     return dispatch => {
-        Api.removePost(post_id).then(post => {
-            dispatch({ type: POST_REMOVE, payload: post })
-            history.push("/");
-        });
+        if (window.confirm("Você confirma a remoção da postagem?")) {
+            Api.removePost(post_id).then(post => {
+                dispatch({ type: POST_REMOVE, payload: post })
+                history.push("/");
+            });
+        }
     }
 }

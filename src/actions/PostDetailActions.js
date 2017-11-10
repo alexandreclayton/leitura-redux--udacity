@@ -81,8 +81,10 @@ export const postDetailCommentAddAction = (CommentEntity, PostEntity) => {
 
 export const postDetailCommentRemoveAction = (comment_id) => {
     return dispatch => {
-        Api.deleteComment(comment_id).then(comment => {
-            dispatch({ type: DETAIL_REMOVE_COMMENT, payload: comment });
-        });
+        if (window.confirm("Você confirma a remoção do comentário?")) {
+            Api.deleteComment(comment_id).then(comment => {
+                dispatch({ type: DETAIL_REMOVE_COMMENT, payload: comment });
+            });
+        }
     }
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import {
     Dialog,
     FlatButton,
@@ -111,10 +112,10 @@ const mapStateToProps = state => (
     }
 );
 
-export default connect(mapStateToProps, {
+export default withRouter(connect(mapStateToProps, {
     rootOpenDialogAction
     , postHandleChangeAction
     , postChangeCategoryAction
     , postFormSaveAction
     , postFormCancelAction
-})(PostFormView);
+})(PostFormView));

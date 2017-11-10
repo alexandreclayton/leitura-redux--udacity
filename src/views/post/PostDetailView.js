@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import {
     getPostDetailAction
     , getAllCommentsByPostId
@@ -26,7 +27,6 @@ import CommentFromView from '../comment/CommentFormView';
 class PostDetailFormView extends Component {
 
     componentDidMount() {
-        console.log(this.props);
         let Id = this.props.match.params.id;
         this.props.getPostDetailAction(Id);
         this.props.getAllCommentsByPostId(Id);
@@ -95,10 +95,10 @@ const mapStateToProps = state => (
     }
 );
 
-export default connect(mapStateToProps, {
+export default withRouter(connect(mapStateToProps, {
     getPostDetailAction
     , getAllCommentsByPostId
     , postDetailOpenDialogCommentAction
     , postDetailCommentRemoveAction
     , postRemove
-})(PostDetailFormView);
+})(PostDetailFormView));
