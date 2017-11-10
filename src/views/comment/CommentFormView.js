@@ -8,7 +8,7 @@ import {
 } from 'material-ui';
 import {
     postDetailOpenDialogCommentAction
-    , postDetailCommentAddAction
+    , postDetailCommentSaveAction
     , postDetailGetCommentAction
     , commentHandleChangeAction
 } from '../../actions/PostDetailActions';
@@ -31,7 +31,7 @@ class CommentFormView extends Component {
                 label="Save"
                 primary={true}
                 keyboardFocused={true}
-                onClick={() => this.props.postDetailCommentAddAction(CommentEntity, PostEntity)}
+                onClick={() => this.props.postDetailCommentSaveAction(CommentEntity, PostEntity)}
             />,
         ];
         return (
@@ -77,7 +77,7 @@ const mapStateToProps = state => ({
 
 export default withRouter(connect(mapStateToProps, {
     postDetailOpenDialogCommentAction
-    , postDetailCommentAddAction
+    , postDetailCommentSaveAction
     , postDetailGetCommentAction
     , commentHandleChangeAction
 })(CommentFormView));
