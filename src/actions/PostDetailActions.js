@@ -7,6 +7,7 @@ import {
     , DETAIL_POST_HANDLE_CHANGE
     , DETAIL_GET_COMMENT
     , DETAIL_ADD_COMMENT
+    , DETAIL_EDIT_COMMENT
     , DETAIL_REMOVE_COMMENT
     , DETAIL_COMMENT_FORM_CLEAN
     , POST_VALID_FORM
@@ -56,10 +57,14 @@ export const commentHandleChangeAction = (event) => {
 export const postDetailCommentAddAction = (CommentEntity, PostEntity) => {
     let fieldsErros = [];
     let newComment = { ...CommentEntity };
+    let insert = false;
     // init new post
-    newComment.id = uuid.v1();
-    newComment.timestamp = moment().valueOf();
-    newComment.parentId = PostEntity.id;
+    if (newComment.id === '') {
+        insert = true;
+        newComment.id = uuid.v1();
+        newComment.timestamp = moment().valueOf();
+        newComment.parentId = PostEntity.id;
+    }
     // Valid form
     for (let prop in newComment) {
         if (newComment[prop] === null || newComment[prop] === "") {
@@ -68,14 +73,29 @@ export const postDetailCommentAddAction = (CommentEntity, PostEntity) => {
     }
     return dispatch => {
         if (fieldsErros.length === 0) {
-            Api.saveComment(newComment).then(comment => {
-                dispatch({ type: DETAIL_ADD_COMMENT, payload: newComment });
-                dispatch({ type: DETAIL_COMMENT_FORM_CLEAN });
-                dispatch({ type: DETAIL_OPEN_DIALOG_COMMENT, payload: false });
-            });
+            if (insert) {
+                Api.saveComment(newComment).then(comment => {
+                    dispatch({ type: DETAIL_ADD_COMMENT, payload: newComment });
+                    dispatch({ type: DETAIL_COMMENT_FORM_CLEAN });
+                    dispatch(postDetailOpenDialogCommentAction(false));
+                });
+            } else {
+                Api.editComment(newComment).then(comment => {
+                    dispatch({ type: DETAIL_EDIT_COMMENT, payload: newComment });
+                    dispatch({ type: DETAIL_COMMENT_FORM_CLEAN });
+                    dispatch(postDetailOpenDialogCommentAction(false));
+                });
+            }
         } else {
             dispatch({ type: POST_VALID_FORM, payload: fieldsErros });
         }
+    }
+}
+
+export const postDetailCommentEditAction = (comment_id) => {
+    return dispatch => {
+        dispatch(postDetailGetCommentAction(comment_id));
+        dispatch(postDetailOpenDialogCommentAction(true));
     }
 }
 

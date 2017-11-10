@@ -5,6 +5,7 @@ import {
     , DETAIL_POST_HANDLE_CHANGE
     , DETAIL_GET_COMMENT
     , DETAIL_ADD_COMMENT
+    , DETAIL_EDIT_COMMENT
     , DETAIL_REMOVE_COMMENT
     , DETAIL_COMMENT_FORM_CLEAN
 } from '../actions/ActionsTypes';
@@ -32,8 +33,9 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, CommentEntity: { ...action.payload } }
         case DETAIL_ADD_COMMENT:
             return { ...state, comments: [...state.comments, action.payload] }
+        case DETAIL_EDIT_COMMENT:
+            return { ...state, comments: state.comments.map(c => (c.id === action.payload.id ? action.payload : c)) }
         case DETAIL_REMOVE_COMMENT:
-            console.log(state.comments.filter(c => action.payload.id !== c.id));
             return { ...state, comments: [...state.comments.filter(c => action.payload.id !== c.id)] }
         case DETAIL_COMMENT_FORM_CLEAN:
             return { ...state, CommentEntity, fieldsErros: [] }

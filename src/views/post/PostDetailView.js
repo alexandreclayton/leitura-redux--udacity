@@ -6,6 +6,7 @@ import {
     , getAllCommentsByPostId
     , postDetailOpenDialogCommentAction
     , postDetailCommentRemoveAction
+    , postDetailCommentEditAction
 } from '../../actions/PostDetailActions';
 import {
     postRemove
@@ -80,7 +81,7 @@ class PostDetailFormView extends Component {
                     body={c.body}
                     voteScore={c.voteScore}
                     timestamp={c.timestamp}
-                    handleEditComment={() => alert}
+                    handleEditComment={this.props.postDetailCommentEditAction}
                     handleRemoveComment={this.props.postDetailCommentRemoveAction} />))}
             </div>
             <CommentFromView />
@@ -101,4 +102,5 @@ export default withRouter(connect(mapStateToProps, {
     , postDetailOpenDialogCommentAction
     , postDetailCommentRemoveAction
     , postRemove
+    , postDetailCommentEditAction
 })(PostDetailFormView));
