@@ -54,7 +54,7 @@ export const commentHandleChangeAction = (event) => {
     }
 }
 
-export const postDetailCommentAddAction = (CommentEntity, PostEntity) => {
+export const postDetailCommentSaveAction = (CommentEntity, PostEntity) => {
     let fieldsErros = [];
     let newComment = { ...CommentEntity };
     let insert = false;
