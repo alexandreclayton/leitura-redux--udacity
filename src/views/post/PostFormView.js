@@ -1,24 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import {
-    Dialog,
-    FlatButton,
-    TextField,
-    FloatingActionButton
-} from 'material-ui';
+import { Dialog, FlatButton, TextField, FloatingActionButton } from 'material-ui';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import * as Styles from '../../styles';
-import { Categories } from '../../components';
-import {
-    rootOpenDialogAction
-} from '../../actions/RootActions';
-import {
-    postHandleChangeAction
-    , postChangeCategoryAction
-    , postFormSaveAction
-    , postFormCancelAction
-} from '../../actions/PostActions';
+import { Categories, If } from '../../components';
+import { rootOpenDialogAction } from '../../actions/RootActions';
+import { postHandleChangeAction, postChangeCategoryAction, postFormSaveAction, postFormCancelAction } from '../../actions/PostActions';
 
 class PostFormView extends Component {
 
@@ -27,7 +15,7 @@ class PostFormView extends Component {
     }
 
     render() {
-        let { PostEntity, fieldsErros, openDialogState } = this.props;
+        let { PostEntity, fieldsErros, openDialogState, fab } = this.props;
         const actions = [
             <FlatButton
                 label="Cancel"
@@ -44,11 +32,13 @@ class PostFormView extends Component {
 
         return (
             <div>
-                <FloatingActionButton
-                    style={Styles.FormPostStyle.FabStyle}
-                    onClick={() => this.props.rootOpenDialogAction(true)}>
-                    <ContentAdd />
-                </FloatingActionButton>
+                <If test={fab}>
+                    <FloatingActionButton
+                        style={Styles.FormPostStyle.FabStyle}
+                        onClick={() => this.props.rootOpenDialogAction(true)}>
+                        <ContentAdd />
+                    </FloatingActionButton>
+                </If>
                 <Dialog
                     title={!PostEntity.id ? "New Post" : "Edit Post"}
                     actions={actions}
@@ -64,7 +54,7 @@ class PostFormView extends Component {
                             floatingLabelFixed={true}
                             fullWidth={true}
                             value={PostEntity.title}
-                            errorText={fieldsErros.find((text)=>text === "title") ? "This field is required" : ""}
+                            errorText={fieldsErros.find((text) => text === "title") ? "This field is required" : ""}
                             onChange={this.props.postHandleChangeAction}
                         /><br />
                         <TextField
@@ -74,7 +64,7 @@ class PostFormView extends Component {
                             floatingLabelFixed={true}
                             multiLine={true}
                             fullWidth={true}
-                            errorText={fieldsErros.find((text)=>text === "body") ? "This field is required" : ""}
+                            errorText={fieldsErros.find((text) => text === "body") ? "This field is required" : ""}
                             value={PostEntity.body}
                             onChange={this.props.postHandleChangeAction}
                         /><br />
@@ -85,7 +75,7 @@ class PostFormView extends Component {
                             floatingLabelFixed={true}
                             fullWidth={true}
                             value={PostEntity.author}
-                            errorText={fieldsErros.find((text)=>text === "author") ? "This field is required" : ""}
+                            errorText={fieldsErros.find((text) => text === "author") ? "This field is required" : ""}
                             onChange={this.props.postHandleChangeAction}
                         /><br />
                         <Categories
@@ -93,7 +83,7 @@ class PostFormView extends Component {
                             categories={this.props.categories}
                             floatingLabelText="Categories"
                             categorySelected={PostEntity.category}
-                            errorText={fieldsErros.find((text)=>text === "category") ? "This field is required" : ""}
+                            errorText={fieldsErros.find((text) => text === "category") ? "This field is required" : ""}
                             handleChange={this.props.postChangeCategoryAction}
                         /><br />
                     </div>
@@ -101,6 +91,10 @@ class PostFormView extends Component {
             </div>
         )
     }
+}
+
+PostFormView.defaultProps = {
+    fab: true
 }
 
 const mapStateToProps = state => (

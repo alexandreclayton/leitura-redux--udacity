@@ -23,8 +23,8 @@ class RootView extends Component {
           categories={categories}
           categorySelected={categorySelected}
           sortSelected={sortSelected}
-          changeCategory={this.props.rootChangeCategoryAction}
-          changeSort={this.props.rootChangeSortAction} />
+          handleChangeCategory={this.props.rootChangeCategoryAction}
+          handleChangeSort={this.props.rootChangeSortAction} />
         <ListPosts posts={posts} />
         <PostFormView />
       </div>

@@ -93,7 +93,7 @@ class PostDetailFormView extends Component {
                     handleEditComment={this.props.postDetailCommentEditAction}
                     handleRemoveComment={this.props.postDetailCommentRemoveAction} />))}
             </div>
-            <PostFormView />
+            <PostFormView fab={false}/>
             <CommentFromView />
         </div>)
     }
