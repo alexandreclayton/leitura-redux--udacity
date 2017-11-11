@@ -1,5 +1,6 @@
 import {
-    POST_FORM_SAVE
+    POST_LOAD_DATA
+    , POST_FORM_SAVE
     , POST_HANDLE_CHANGE
     , POST_CHANGE_CATEGORY
     , POST_VALID_FORM
@@ -18,6 +19,8 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, PostEntity: { ...state.PostEntity, [action.field]: action.payload } }
         case POST_CHANGE_CATEGORY:
             return { ...state, PostEntity: { ...state.PostEntity, category: action.payload } }
+        case POST_LOAD_DATA:
+            return { ...state, PostEntity: action.payload }
         case POST_FORM_SAVE:
             return { ...state, PostEntity: { ...state.PostEntity, ...action.payload } }
         case POST_VALID_FORM:

@@ -6,6 +6,7 @@ import {
     , ROOT_LIST_POSTS
     , ROOT_DIALOG_POST_FORM
     , ROOT_UPDATE_POSTS
+    , ROOT_EDIT_POST
     , POST_REMOVE
 } from '../actions/ActionsTypes';
 
@@ -37,6 +38,8 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, openDialogState: action.payload }
         case ROOT_UPDATE_POSTS:
             return { ...state, posts: [...state.posts, action.payload] }
+        case ROOT_EDIT_POST: 
+            return { ...state, posts: state.posts.map(p => (p.id === action.payload.id ? action.payload : p))}
         case POST_REMOVE:
             return { ...state, posts: [...state.posts.filter(p => action.payload !== p)] }
         default:

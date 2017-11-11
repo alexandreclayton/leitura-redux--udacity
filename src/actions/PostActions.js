@@ -2,14 +2,18 @@ import uuid from 'uuid';
 import moment from 'moment';
 import {
     ROOT_UPDATE_POSTS
+    , ROOT_EDIT_POST
     , ROOT_DIALOG_POST_FORM
     , POST_HANDLE_CHANGE
     , POST_CHANGE_CATEGORY
+    , POST_LOAD_DATA
     , POST_FORM_SAVE
     , POST_VALID_FORM
     , POST_CLEAN_FORM
     , POST_REMOVE
+    , DETAIL_GET_POST
 } from './ActionsTypes';
+import { rootListCategoriesAction } from './RootActions';
 import * as Api from '../util/api';
 
 export const postHandleChangeAction = (event) => {
@@ -30,9 +34,13 @@ export const postChangeCategoryAction = category => {
 export const postFormSaveAction = (PostEntity) => {
     let fieldsErros = [];
     let newPost = { ...PostEntity };
+    let insert = false;
     // init new post
-    newPost.id = uuid.v1();
-    newPost.timestamp = moment().valueOf();
+    if (newPost.id === '') {
+        insert = true;
+        newPost.id = uuid.v1();
+        newPost.timestamp = moment().valueOf();
+    }
     // Valid form
     for (let prop in newPost) {
         if (newPost[prop] === null || newPost[prop] === "") {
@@ -42,12 +50,21 @@ export const postFormSaveAction = (PostEntity) => {
     // Enviar para servidor
     return dispatch => {
         if (fieldsErros.length === 0) {
-            Api.savePost(newPost).then(post => {
-                dispatch({ type: POST_FORM_SAVE, payload: newPost });
-                dispatch({ type: ROOT_UPDATE_POSTS, payload: post });
-                dispatch({ type: ROOT_DIALOG_POST_FORM, payload: false });
-                dispatch({ type: POST_CLEAN_FORM });
-            });
+            if (insert) {
+                Api.savePost(newPost).then(post => {
+                    dispatch({ type: POST_FORM_SAVE, payload: newPost });
+                    dispatch({ type: ROOT_UPDATE_POSTS, payload: post });
+                    dispatch({ type: ROOT_DIALOG_POST_FORM, payload: false });
+                    dispatch({ type: POST_CLEAN_FORM });
+                });
+            } else {
+                Api.editPost(newPost).then(post => {
+                    dispatch({ type: DETAIL_GET_POST, payload: post });
+                    dispatch({ type: ROOT_EDIT_POST, payload: post });
+                    dispatch({ type: ROOT_DIALOG_POST_FORM, payload: false });
+                    dispatch({ type: POST_CLEAN_FORM });
+                });
+            }
         } else {
             dispatch({ type: POST_VALID_FORM, payload: fieldsErros });
         }
@@ -61,10 +78,18 @@ export const postFormCancelAction = () => {
     }
 }
 
-export const postRemove = (post_id, history) => {
+export const postEdit = (PostEntity) => {
+    return dispatch => {
+        dispatch(rootListCategoriesAction());
+        dispatch({ type: POST_LOAD_DATA, payload: PostEntity });
+        dispatch({ type: ROOT_DIALOG_POST_FORM, payload: true });
+    }
+}
+
+export const postRemove = (PostEntity, history) => {
     return dispatch => {
         if (window.confirm("Você confirma a remoção da postagem?")) {
-            Api.removePost(post_id).then(post => {
+            Api.removePost(PostEntity.id).then(post => {
                 dispatch({ type: POST_REMOVE, payload: post })
                 history.push("/");
             });

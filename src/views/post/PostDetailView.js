@@ -9,7 +9,8 @@ import {
     , postDetailCommentEditAction
 } from '../../actions/PostDetailActions';
 import {
-    postRemove
+    postEdit
+    , postRemove
 } from '../../actions/PostActions';
 import moment from 'moment';
 import { AppBar, Toolbar, ToolbarTitle, ToolbarGroup } from 'material-ui';
@@ -23,6 +24,7 @@ import EditorModeEdit from 'material-ui/svg-icons/editor/mode-edit';
 import HardwareKeyboardArrowLeft from 'material-ui/svg-icons/hardware/keyboard-arrow-left';
 import { red500, blue500, green500 } from 'material-ui/styles/colors';
 import { Comment } from '../../components';
+import PostFormView from '../post/PostFormView';
 import CommentFromView from '../comment/CommentFormView';
 
 class PostDetailFormView extends Component {
@@ -47,12 +49,14 @@ class PostDetailFormView extends Component {
                     <ToolbarTitle text={`Vote Score: ${voteScore}`} />
                 </ToolbarGroup>
                 <ToolbarGroup>
-                    <IconButton touch={true} tooltip="Edit Post">
+                    <IconButton touch={true} 
+                        tooltip="Edit Post"
+                        onClick={() => this.props.postEdit(PostEntity)}>
                         <EditorModeEdit />
                     </IconButton>
                     <IconButton touch={true}
                         tooltip="Delete Post"
-                        onClick={() => this.props.postRemove(PostEntity.id, this.props.history)}>
+                        onClick={() => this.props.postRemove(PostEntity, this.props.history)}>
                         <ActionDelete />
                     </IconButton>
                 </ToolbarGroup>
@@ -84,6 +88,7 @@ class PostDetailFormView extends Component {
                     handleEditComment={this.props.postDetailCommentEditAction}
                     handleRemoveComment={this.props.postDetailCommentRemoveAction} />))}
             </div>
+            <PostFormView />
             <CommentFromView />
         </div>)
     }
@@ -101,6 +106,7 @@ export default withRouter(connect(mapStateToProps, {
     , getAllCommentsByPostId
     , postDetailOpenDialogCommentAction
     , postDetailCommentRemoveAction
+    , postEdit
     , postRemove
     , postDetailCommentEditAction
 })(PostDetailFormView));

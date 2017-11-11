@@ -58,7 +58,7 @@ export const postDetailCommentSaveAction = (CommentEntity, PostEntity) => {
     let fieldsErros = [];
     let newComment = { ...CommentEntity };
     let insert = false;
-    // init new post
+    // init new comment
     if (newComment.id === '') {
         insert = true;
         newComment.id = uuid.v1();
