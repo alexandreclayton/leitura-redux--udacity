@@ -1,24 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import {
-    Dialog,
-    FlatButton,
-    TextField
-} from 'material-ui';
-import {
-    postDetailOpenDialogCommentAction
-    , postDetailCommentSaveAction
-    , postDetailGetCommentAction
-    , commentHandleChangeAction
-} from '../../actions/PostDetailActions';
+import { Dialog, FlatButton, TextField } from 'material-ui';
+import { postDetailOpenDialogCommentAction, postDetailCommentSaveAction, postDetailGetCommentAction, commentHandleChangeAction } from '../../actions/PostDetailActions';
 
 class CommentFormView extends Component {
-
-    componentDidMount() {
-
-    }
-
     render() {
         let { PostEntity, CommentEntity, fieldsErros, openDialogState } = this.props;
         const actions = [

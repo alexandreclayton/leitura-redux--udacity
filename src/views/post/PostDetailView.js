@@ -49,6 +49,7 @@ class PostDetailFormView extends Component {
             <Toolbar>
                 <ToolbarGroup firstChild={false}>
                     <ToolbarTitle text={`Vote Score: ${voteScore}`} />
+                    <ToolbarTitle text={`Total Comments: ${comments.length}`} />
                 </ToolbarGroup>
                 <ToolbarGroup>
                     <IconButton touch={true}
@@ -93,7 +94,7 @@ class PostDetailFormView extends Component {
                     handleEditComment={this.props.postDetailCommentEditAction}
                     handleRemoveComment={this.props.postDetailCommentRemoveAction} />))}
             </div>
-            <PostFormView fab={false}/>
+            <PostFormView fab={false} />
             <CommentFromView />
         </div>)
     }
