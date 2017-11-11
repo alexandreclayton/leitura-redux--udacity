@@ -7,16 +7,22 @@ import ActionDelete from 'material-ui/svg-icons/action/delete';
 import { red500, green500 } from 'material-ui/styles/colors';
 import moment from 'moment';
 
-export const Comment = ({ id, author, body, voteScore, timestamp, handleEditComment, handleRemoveComment }) => (
+export const Comment = ({ id, author, body, voteScore, timestamp, handleEditComment, handleRemoveComment, handleVoteComment }) => (
     <div>
         <strong>{author},</strong>
         <p>{body}</p>
         <small>Vote Score: {voteScore}, {moment(timestamp).format("DD/MM/YY HH:mm")}</small>
         <div>
-            <IconButton touch={true} tooltip="Vote UP">
+            <IconButton
+                touch={true}
+                tooltip="Vote UP"
+                onClick={() => handleVoteComment(id, "upVote")}>
                 <ActionThumbUp color={green500} />
             </IconButton>
-            <IconButton touch={true} tooltip="Vote DOWN">
+            <IconButton
+                touch={true}
+                tooltip="Vote DOWN"
+                onClick={() => handleVoteComment(id, "downVote")}>
                 <ActionThumbDown color={red500} />
             </IconButton>
             <IconButton touch={true}

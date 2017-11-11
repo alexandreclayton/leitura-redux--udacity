@@ -78,7 +78,7 @@ export const postFormCancelAction = () => {
     }
 }
 
-export const postEdit = (PostEntity) => {
+export const postEditAction = (PostEntity) => {
     return dispatch => {
         dispatch(rootListCategoriesAction());
         dispatch({ type: POST_LOAD_DATA, payload: PostEntity });
@@ -86,13 +86,21 @@ export const postEdit = (PostEntity) => {
     }
 }
 
-export const postRemove = (PostEntity, history) => {
+export const postRemoveAction = (post_id, history) => {
     return dispatch => {
         if (window.confirm("Você confirma a remoção da postagem?")) {
-            Api.removePost(PostEntity.id).then(post => {
+            Api.removePost(post_id).then(post => {
                 dispatch({ type: POST_REMOVE, payload: post })
                 history.push("/");
             });
         }
+    }
+}
+
+export const postVoteAction = (post_id, option) => {
+    return dispatch => {
+        Api.votePost(post_id, { option }).then(post => {
+            dispatch(postFormSaveAction(post));
+        });
     }
 }

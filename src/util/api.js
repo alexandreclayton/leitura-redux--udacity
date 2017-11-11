@@ -56,6 +56,16 @@ export const removePost = (post_id) =>
         headers
     }).then(res => res.json());
 
+export const votePost = (post_id, voteOption) =>
+    fetch(`${api}/posts/${post_id}`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(voteOption)
+    }).then(res => res.json());
+
 // Comment
 export const getAllCommentsByPostId = (post_id) =>
     fetch(`${api}/posts/${post_id}/comments`, { headers })
@@ -89,4 +99,14 @@ export const deleteComment = (comment_id) =>
     fetch(`${api}/comments/${comment_id}`, {
         method: 'DELETE',
         headers
+    }).then(res => res.json());
+
+export const voteComment = (comment_id, voteOption) =>
+    fetch(`${api}/comments/${comment_id}`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(voteOption)
     }).then(res => res.json());

@@ -3,14 +3,16 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import {
     getPostDetailAction
-    , getAllCommentsByPostId
+    , getAllCommentsByPostIdAction
     , postDetailOpenDialogCommentAction
     , postDetailCommentRemoveAction
     , postDetailCommentEditAction
+    , postDetailCommentVoteAction
 } from '../../actions/PostDetailActions';
 import {
-    postEdit
-    , postRemove
+    postEditAction
+    , postRemoveAction
+    , postVoteAction
 } from '../../actions/PostActions';
 import moment from 'moment';
 import { AppBar, Toolbar, ToolbarTitle, ToolbarGroup } from 'material-ui';
@@ -32,7 +34,7 @@ class PostDetailFormView extends Component {
     componentDidMount() {
         let Id = this.props.match.params.id;
         this.props.getPostDetailAction(Id);
-        this.props.getAllCommentsByPostId(Id);
+        this.props.getAllCommentsByPostIdAction(Id);
     }
 
     render() {
@@ -49,14 +51,14 @@ class PostDetailFormView extends Component {
                     <ToolbarTitle text={`Vote Score: ${voteScore}`} />
                 </ToolbarGroup>
                 <ToolbarGroup>
-                    <IconButton touch={true} 
+                    <IconButton touch={true}
                         tooltip="Edit Post"
-                        onClick={() => this.props.postEdit(PostEntity)}>
+                        onClick={() => this.props.postEditAction(PostEntity)}>
                         <EditorModeEdit />
                     </IconButton>
                     <IconButton touch={true}
                         tooltip="Delete Post"
-                        onClick={() => this.props.postRemove(PostEntity, this.props.history)}>
+                        onClick={() => this.props.postRemoveAction(PostEntity.id, this.props.history)}>
                         <ActionDelete />
                     </IconButton>
                 </ToolbarGroup>
@@ -64,10 +66,16 @@ class PostDetailFormView extends Component {
             <h1>{title}</h1>
             <div id="content">{body}</div>
             <small>By: {author}, Date: {moment(timestamp).format("DD/MM/YY HH:mm")}</small><br />
-            <IconButton touch={true} tooltip="Vote UP">
+            <IconButton
+                touch={true}
+                tooltip="Vote UP"
+                onClick={() => this.props.postVoteAction(PostEntity.id, "upVote")}>
                 <ActionThumbUp color={green500} />
             </IconButton>
-            <IconButton touch={true} tooltip="Vote DOWN">
+            <IconButton
+                touch={true}
+                tooltip="Vote DOWN"
+                onClick={() => this.props.postVoteAction(PostEntity.id, "downVote")}>
                 <ActionThumbDown color={red500} />
             </IconButton>
             <div id="comments">
@@ -85,6 +93,7 @@ class PostDetailFormView extends Component {
                     body={c.body}
                     voteScore={c.voteScore}
                     timestamp={c.timestamp}
+                    handleVoteComment={this.props.postDetailCommentVoteAction}
                     handleEditComment={this.props.postDetailCommentEditAction}
                     handleRemoveComment={this.props.postDetailCommentRemoveAction} />))}
             </div>
@@ -103,10 +112,12 @@ const mapStateToProps = state => (
 
 export default withRouter(connect(mapStateToProps, {
     getPostDetailAction
-    , getAllCommentsByPostId
+    , getAllCommentsByPostIdAction
     , postDetailOpenDialogCommentAction
     , postDetailCommentRemoveAction
-    , postEdit
-    , postRemove
+    , postEditAction
+    , postRemoveAction
+    , postVoteAction
     , postDetailCommentEditAction
+    , postDetailCommentVoteAction
 })(PostDetailFormView));

@@ -23,7 +23,7 @@ export const getPostDetailAction = (id) => {
     }
 }
 
-export const getAllCommentsByPostId = (id) => {
+export const getAllCommentsByPostIdAction = (id) => {
     return dispatch => {
         Api.getAllCommentsByPostId(id).then(comments => {
             dispatch({ type: DETAIL_GET_ALL_COMMENTS, payload: comments.filter(c => !c.deleted) });
@@ -54,7 +54,7 @@ export const commentHandleChangeAction = (event) => {
     }
 }
 
-export const postDetailCommentSaveAction = (CommentEntity, PostEntity) => {
+export const postDetailCommentSaveAction = (CommentEntity, parentId) => {
     let fieldsErros = [];
     let newComment = { ...CommentEntity };
     let insert = false;
@@ -63,7 +63,7 @@ export const postDetailCommentSaveAction = (CommentEntity, PostEntity) => {
         insert = true;
         newComment.id = uuid.v1();
         newComment.timestamp = moment().valueOf();
-        newComment.parentId = PostEntity.id;
+        newComment.parentId = parentId;
     }
     // Valid form
     for (let prop in newComment) {
@@ -106,5 +106,13 @@ export const postDetailCommentRemoveAction = (comment_id) => {
                 dispatch({ type: DETAIL_REMOVE_COMMENT, payload: comment });
             });
         }
+    }
+}
+
+export const postDetailCommentVoteAction = (comment_id, option) => {
+    return dispatch => {
+        Api.voteComment(comment_id, { option }).then(comment => {
+            dispatch(postDetailCommentSaveAction(comment, comment.parentId));
+        });
     }
 }
