@@ -25,7 +25,7 @@ import ActionDelete from 'material-ui/svg-icons/action/delete';
 import EditorModeEdit from 'material-ui/svg-icons/editor/mode-edit';
 import HardwareKeyboardArrowLeft from 'material-ui/svg-icons/hardware/keyboard-arrow-left';
 import { red500, blue500, green500 } from 'material-ui/styles/colors';
-import { Comment } from '../../components';
+import { Commentary } from '../../components';
 import PostFormView from '../post/PostFormView';
 import CommentFromView from '../comment/CommentFormView';
 
@@ -86,13 +86,9 @@ class PostDetailFormView extends Component {
                         <ActionNoteAdd color={blue500} />
                     </IconButton>
                 </h2>
-                {comments.map(c => (<Comment
+                {comments.map(c => (<Commentary
                     key={c.id}
-                    id={c.id}
-                    author={c.author}
-                    body={c.body}
-                    voteScore={c.voteScore}
-                    timestamp={c.timestamp}
+                    CommentEntity={c}
                     handleVoteComment={this.props.postDetailCommentVoteAction}
                     handleEditComment={this.props.postDetailCommentEditAction}
                     handleRemoveComment={this.props.postDetailCommentRemoveAction} />))}

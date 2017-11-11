@@ -1,15 +1,10 @@
 import React from 'react';
-import {
-    List,
-    ListItem,
-    Divider,
-    Badge
-} from 'material-ui';
+import PropTypes from 'prop-types';
+import { List, ListItem, Divider, Badge } from 'material-ui';
 import ActionGrade from 'material-ui/svg-icons/action/grade';
 import EditorInsertInvitation from 'material-ui/svg-icons/editor/insert-invitation';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
-
 import * as Styles from '../styles';
 
 export const ListPosts = ({ posts }) => (
@@ -34,3 +29,11 @@ export const ListPosts = ({ posts }) => (
             </Link>))}
     </List>
 );
+
+ListPosts.defaultProps = {
+    posts: []
+};
+
+ListPosts.propTypes = {
+    posts: PropTypes.array.isRequired
+};
