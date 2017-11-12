@@ -68,7 +68,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Screen Application
 
 ## RootView
-<blockquote class="imgur-embed-pub" lang="en" data-id="3GlEpZ6"><a href="//imgur.com/3GlEpZ6"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+![alt text](https://i.imgur.com/3GlEpZ6.png)
 
 ## RootView - New Post
 <blockquote class="imgur-embed-pub" lang="en" data-id="XzayMpF"><a href="//imgur.com/XzayMpF">View post on imgur.com</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
