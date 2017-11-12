@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import RootView from '../views/root';
+import RootView from '../views/root/RootView';
 import PostDetailView from '../views/post/PostDetailView';
 
 
