@@ -75,3 +75,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Detail Post
 ![alt text](https://i.imgur.com/09VIP2n.png)
+
+## Add New Comment
+![alt text](https://i.imgur.com/AeV2e2a.png)
