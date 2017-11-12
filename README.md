@@ -47,7 +47,7 @@ To get started developing right away:
     │   └── index.js
     ├── style # Application Styles
     ├── util 
-    │   └── api.js # A JavaScript API for the provided Udacity backend. Instructions for the methods are below.
+    │   └── api.js # A JavaScript API for the provided Udacity backend.
     ├── views
     │   ├── comment
     │   │   └── CommentFormView.js    
