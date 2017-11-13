@@ -8,6 +8,11 @@ import {
   , rootListPostsAction
   , rootOpenDialogAction
 } from '../../actions/RootActions';
+import {
+  postEditAction
+  , postRemoveAction
+  , postVoteAction
+} from '../../actions/PostActions';
 import PostFormView from '../../views/post/PostFormView';
 import { ListPosts, MenuNavTop } from '../../components';
 
@@ -17,8 +22,7 @@ class RootView extends Component {
     this.props.rootListPostsAction();
   }
   render() {
-    console.log(this.props.history);
-    let { posts, categories, categorySelected, sortSelected } = this.props;
+    let { history, posts, categories, categorySelected, sortSelected } = this.props;
     return (
       <div>
         <MenuNavTop title="Leitura"
@@ -27,7 +31,12 @@ class RootView extends Component {
           sortSelected={sortSelected}
           handleChangeCategory={this.props.rootChangeCategoryAction}
           handleChangeSort={this.props.rootChangeSortAction} />
-        <ListPosts posts={posts} />
+        <ListPosts
+          posts={posts}
+          history={history}
+          handleVotePost={this.props.postVoteAction}
+          handleEditPost={this.props.postEditAction}
+          handleDeletePost={this.props.postRemoveAction} />
         <PostFormView />
       </div>
     );
@@ -50,5 +59,8 @@ export default withRouter(connect(mapStateToProps, {
   , rootListCategoriesAction
   , rootListPostsAction
   , rootOpenDialogAction
+  , postVoteAction
+  , postEditAction
+  , postRemoveAction
 })(RootView));
 

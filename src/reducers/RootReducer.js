@@ -41,7 +41,7 @@ export default (state = INITIAL_STATE, action) => {
         case ROOT_EDIT_POST: 
             return { ...state, posts: state.posts.map(p => (p.id === action.payload.id ? action.payload : p))}
         case POST_REMOVE:
-            return { ...state, posts: [...state.posts.filter(p => action.payload !== p)] }
+            return { ...state, posts: [...state.posts.filter(p => action.payload.id !== p.id)] }
         default:
             return state;
     }
