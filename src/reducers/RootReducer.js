@@ -19,6 +19,7 @@ const INITIAL_STATE = {
 }
 
 export default (state = INITIAL_STATE, action) => {
+    let { categorySelected, sortSelected } = state;
     switch (action.type) {
         case ROOT_CHANGE_CATEGORY:
             return { ...state, categorySelected: action.payload }
@@ -27,7 +28,6 @@ export default (state = INITIAL_STATE, action) => {
         case ROOT_LIST_CATEGORIES:
             return { ...state, categories: action.payload }
         case ROOT_LIST_POSTS:
-            let { categorySelected, sortSelected } = state;
             let posts = action.payload.filter(p => !p.deleted);
             let newPosts = posts.sort(sortBy(sortSelected));
             if (categorySelected !== 'all') {
@@ -37,9 +37,14 @@ export default (state = INITIAL_STATE, action) => {
         case ROOT_DIALOG_POST_FORM:
             return { ...state, openDialogState: action.payload }
         case ROOT_UPDATE_POSTS:
-            return { ...state, posts: [...state.posts, action.payload] }
-        case ROOT_EDIT_POST: 
-            return { ...state, posts: state.posts.map(p => (p.id === action.payload.id ? action.payload : p))}
+            debugger;
+            if (categorySelected === "all" || action.payload.category === categorySelected) {
+                return { ...state, posts: [...state.posts, action.payload] }
+            } else {
+                return { ...state }
+            }
+        case ROOT_EDIT_POST:
+            return { ...state, posts: state.posts.map(p => (p.id === action.payload.id ? action.payload : p)) }
         case POST_REMOVE:
             return { ...state, posts: [...state.posts.filter(p => action.payload.id !== p.id)] }
         default:
