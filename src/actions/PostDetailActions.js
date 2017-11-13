@@ -11,14 +11,18 @@ import {
     , DETAIL_REMOVE_COMMENT
     , DETAIL_COMMENT_FORM_CLEAN
     , POST_VALID_FORM
-
 } from './ActionsTypes';
 import * as Api from '../util/api';
 
-export const getPostDetailAction = (id) => {
+export const getPostDetailAction = (id, history) => {
     return dispatch => {
         Api.getPostsDetail(id).then(post => {
-            dispatch({ type: DETAIL_GET_POST, payload: post });
+            if (Object.keys(post).length > 0) {
+                dispatch({ type: DETAIL_GET_POST, payload: post });
+            } else {
+                alert("Sorry this post was not found.");
+                history.push("/");
+            }
         });
     }
 }
@@ -27,6 +31,18 @@ export const getAllCommentsByPostIdAction = (id) => {
     return dispatch => {
         Api.getAllCommentsByPostId(id).then(comments => {
             dispatch({ type: DETAIL_GET_ALL_COMMENTS, payload: comments.filter(c => !c.deleted) });
+        });
+    }
+}
+
+export const deleteAllCommentsByPostIdAction = (post_id) => {
+    return dispatch => {
+        Api.getAllCommentsByPostId(post_id).then(comments => {
+            comments.map(comment => {
+                Api.deleteComment(comment.id).then(commentDeleted => {
+                    dispatch({ type: DETAIL_EDIT_COMMENT, payload: commentDeleted });
+                });
+            });
         });
     }
 }

@@ -17,7 +17,7 @@ class RouterApp extends Component {
                 <Route exact path="/" component={RootView} />
                 <Route exact path="/:category" component={RootView} />
                 <Route path="/:category/:postId" component={PostDetailView} />
-                <Route component={Error404View} />
+                <Route component={this.Error404View} />
             </Switch>
         )
     }

@@ -32,7 +32,7 @@ class PostDetailFormView extends Component {
 
     componentDidMount() {
         let postId = this.props.match.params.postId;
-        this.props.getPostDetailAction(postId);
+        this.props.getPostDetailAction(postId, this.props.history);
         this.props.getAllCommentsByPostIdAction(postId);
     }
 
