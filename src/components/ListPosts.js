@@ -55,7 +55,7 @@ export const ListPosts = ({ posts, history, handleVotePost, handleEditPost, hand
                                     <EditorInsertInvitation style={Styles.ListPostsStyle.Icon} />
                                     {moment(p.timestamp).format("DD/MM/YY HH:mm")}
                                     , {p.author}
-                                    , Total comments:
+                                    , Total comments: {p.totalComments}
                                 </span>
                                 <br />
                                 {p.body.substring(0, 100)}

@@ -87,7 +87,6 @@ export const postEditAction = (PostEntity) => {
 }
 
 export const postRemoveAction = (post_id, history) => {
-    console.log(history);
     return dispatch => {
         if (window.confirm("Você confirma a remoção da postagem?")) {
             Api.removePost(post_id).then(post => {

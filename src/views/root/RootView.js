@@ -17,10 +17,12 @@ import PostFormView from '../../views/post/PostFormView';
 import { ListPosts, MenuNavTop } from '../../components';
 
 class RootView extends Component {
+
   componentDidMount() {
     this.props.rootListCategoriesAction();
     this.props.rootListPostsAction();
   }
+  
   render() {
     let { history, posts, categories, categorySelected, sortSelected } = this.props;
     return (

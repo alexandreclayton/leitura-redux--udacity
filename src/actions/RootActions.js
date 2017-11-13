@@ -1,4 +1,3 @@
-
 import {
     ROOT_CHANGE_CATEGORY
     , ROOT_CHANGE_SORT
@@ -33,7 +32,12 @@ export const rootListCategoriesAction = () => {
 export const rootListPostsAction = () => {
     return dispatch => {
         Api.getAllPosts().then(posts => {
-            dispatch({ type: ROOT_LIST_POSTS, payload: posts })
+            posts.map(post => {
+                Api.getAllCommentsByPostId(post.id).then(comments => {
+                    post.totalComments = comments.length;
+                    dispatch({ type: ROOT_LIST_POSTS, payload: posts })
+                });
+            });
         });
     }
 }
