@@ -26,8 +26,8 @@ Categories.defaultProps = {
     , categorySelected: 'all'
     , floatingLabelText: ''
     , name: ''
-    , style: ''
-    , labelStyle: ''
+    , style: null
+    , labelStyle: null
     , errorText: ''
     , showFirstElement: false
 };
@@ -37,7 +37,7 @@ Categories.propTypes = {
     , categorySelected: PropTypes.string.isRequired
     , floatingLabelText: PropTypes.string
     , name: PropTypes.string
-    , style: PropTypes.object
+    , style: PropTypes.string
     , labelStyle: PropTypes.string
     , errorText: PropTypes.string
     , showFirstElement: PropTypes.bool

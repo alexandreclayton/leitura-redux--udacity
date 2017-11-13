@@ -15,8 +15,7 @@ import {
     , postVoteAction
 } from '../../actions/PostActions';
 import moment from 'moment';
-import { AppBar, Toolbar, ToolbarTitle, ToolbarGroup } from 'material-ui';
-import IconButton from 'material-ui/IconButton';
+import { AppBar, Toolbar, ToolbarTitle, ToolbarGroup, IconButton } from 'material-ui';
 import { Link } from 'react-router-dom';
 import ActionNoteAdd from 'material-ui/svg-icons/action/note-add';
 import ActionThumbUp from 'material-ui/svg-icons/action/thumb-up';

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import {
   rootChangeCategoryAction
@@ -16,6 +17,7 @@ class RootView extends Component {
     this.props.rootListPostsAction();
   }
   render() {
+    console.log(this.props.history);
     let { posts, categories, categorySelected, sortSelected } = this.props;
     return (
       <div>
@@ -42,11 +44,11 @@ const mapStateToProps = state => (
   }
 );
 
-export default connect(mapStateToProps, {
+export default withRouter(connect(mapStateToProps, {
   rootChangeCategoryAction
   , rootChangeSortAction
   , rootListCategoriesAction
   , rootListPostsAction
   , rootOpenDialogAction
-})(RootView);
+})(RootView));
 
