@@ -5,7 +5,7 @@ import {
     MenuItem
 } from 'material-ui';
 
-export const Categories = ({ categories, categorySelected, floatingLabelText, name, style, labelStyle, errorText, showFirstElement, handleChange }) => (
+export const Categories = ({ history, categories, categorySelected, floatingLabelText, name, style, labelStyle, errorText, showFirstElement, handleChange }) => (
     <SelectField
         name={name}
         style={style}
@@ -15,7 +15,7 @@ export const Categories = ({ categories, categorySelected, floatingLabelText, na
         autoWidth={true}
         value={categorySelected}
         errorText={errorText}
-        onChange={(event, index, categorySelected) => handleChange(categorySelected)}>
+        onChange={(event, index, categorySelected) => handleChange(categorySelected, history)}>
         {showFirstElement ? <MenuItem value="all" key="all" primaryText="All" /> : null}
         {categories.map(i => (<MenuItem value={i.path} key={i.path} primaryText={i.name} />))}
     </SelectField>

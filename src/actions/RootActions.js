@@ -7,10 +7,14 @@ import {
 } from './ActionsTypes';
 import * as Api from '../util/api';
 
-export const rootChangeCategoryAction = category => {
-    return dispatch => {
-        dispatch({ type: ROOT_CHANGE_CATEGORY, payload: category });
-        dispatch(rootListPostsAction());
+export const rootChangeCategoryAction = (category, history) => {
+    return dispatch => {        
+        dispatch({ type: ROOT_CHANGE_CATEGORY, payload: category });        
+        dispatch(rootListPostsAction(category));
+        if (history) {
+            history.push(`/${category}`);
+        }        
+        
     }
 }
 
@@ -29,7 +33,7 @@ export const rootListCategoriesAction = () => {
     }
 }
 
-export const rootListPostsAction = () => {
+export const rootListPostsAction = (categoryId) => {
     return dispatch => {
         Api.getAllPosts().then(posts => {
             posts.map(post => {

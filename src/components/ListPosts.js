@@ -24,7 +24,7 @@ export const ListPosts = ({ posts, history, handleVotePost, handleEditPost, hand
     return (
         <List>
             {posts.map(p => (
-                <div onClick={() => history.push(`/post/${p.id}`)} key={p.id}>
+                <div onClick={() => history.push(`/${p.category}/${p.id}`)} key={p.id}>
                     <ListItem
                         leftIcon={
                             <Badge

@@ -5,7 +5,7 @@ import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 import { Categories } from './Categories';
 import { If } from './If';
 
-export const MenuNavTop = ({ title, useToobar, categories, categorySelected, sortSelected, handleChangeCategory, handleChangeSort }) => (
+export const MenuNavTop = ({ history, title, useToobar, categories, categorySelected, sortSelected, handleChangeCategory, handleChangeSort }) => (
     <div>
         <AppBar title={title} />
         <If test={useToobar}>
@@ -13,6 +13,7 @@ export const MenuNavTop = ({ title, useToobar, categories, categorySelected, sor
                 <ToolbarGroup>
                     <ToolbarTitle text="Categories:" />
                     <Categories
+                        history={history}
                         categories={categories}
                         categorySelected={categorySelected}
                         handleChange={handleChangeCategory}
