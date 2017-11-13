@@ -31,9 +31,7 @@ import CommentFromView from '../comment/CommentFormView';
 class PostDetailFormView extends Component {
 
     componentDidMount() {
-        let categoryId = this.props.match.params.category;
         let postId = this.props.match.params.postId;
-        
         this.props.getPostDetailAction(postId);
         this.props.getAllCommentsByPostIdAction(postId);
     }

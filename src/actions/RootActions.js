@@ -14,7 +14,6 @@ export const rootChangeCategoryAction = (category, history) => {
         if (history) {
             history.push(`/${category}`);
         }        
-        
     }
 }
 

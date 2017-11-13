@@ -15,9 +15,8 @@ class RouterApp extends Component {
         return (
             <Switch>
                 <Route exact path="/" component={RootView} />
-                <Route path="/:category" component={RootView} />
+                <Route exact path="/:category" component={RootView} />
                 <Route path="/:category/:postId" component={PostDetailView} />
-                <Route path="/post/:id" component={PostDetailView} />
                 <Route component={Error404View} />
             </Switch>
         )

@@ -19,7 +19,6 @@ import { ListPosts, MenuNavTop } from '../../components';
 class RootView extends Component {
 
   componentDidMount() {
-    let categoryId = this.props.match.params.category;
     this.props.rootListCategoriesAction();
     this.props.rootChangeCategoryAction("all", this.props.history);
   }
