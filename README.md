@@ -46,13 +46,10 @@ To get started developing right away:
     ├── store # Store(Redux) of the application
     │   └── index.js
     ├── style # Application Styles
-<<<<<<< HEAD
     │   ├── index.js
     │   ├── FormPostStyle.js
     │   ├── ListPostsStyle.js
     │   └── MenuNavTopStyle.js
-=======
->>>>>>> bc4cb4362fe4dbef3f630f609896ec8cbf611ee6
     ├── util 
     │   └── api.js # A JavaScript API for the provided Udacity backend.
     ├── views
