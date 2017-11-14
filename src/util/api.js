@@ -28,7 +28,7 @@ export const getAllPosts = () =>
 
 export const getPostsDetail = (Id) =>
     fetch(`${api}/posts/${Id}`, { headers })
-        .then(res => res.json());
+        .then(res => res.json())
 
 export const savePost = (PostEntity) =>
     fetch(`${api}/posts`, {

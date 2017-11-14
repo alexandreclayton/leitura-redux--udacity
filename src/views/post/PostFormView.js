@@ -10,10 +10,6 @@ import { postHandleChangeAction, postChangeCategoryAction, postFormSaveAction, p
 
 class PostFormView extends Component {
 
-    componentDidMount() {
-        // Caso tenha ID buscar no servidor os dados para edição
-    }
-
     render() {
         let { PostEntity, fieldsErros, openDialogState, fab } = this.props;
         const actions = [

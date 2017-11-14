@@ -17,7 +17,7 @@ import * as Api from '../util/api';
 export const getPostDetailAction = (id, history) => {
     return dispatch => {
         Api.getPostsDetail(id).then(post => {
-            if (Object.keys(post).length > 0) {
+            if (Object.keys(post).length > 0 && post.error === undefined) {
                 dispatch({ type: DETAIL_GET_POST, payload: post });
             } else {
                 alert("Sorry this post was not found.");

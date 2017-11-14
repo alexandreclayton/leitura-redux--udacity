@@ -14,7 +14,6 @@ import {
     , DETAIL_GET_POST
 } from './ActionsTypes';
 import { rootListCategoriesAction } from './RootActions';
-import { postDetailCommentSaveAction } from './PostDetailActions';
 import * as Api from '../util/api';
 
 export const postHandleChangeAction = (event) => {
