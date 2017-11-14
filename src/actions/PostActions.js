@@ -33,6 +33,7 @@ export const postChangeCategoryAction = category => {
 }
 
 export const postFormSaveAction = (PostEntity) => {
+    debugger;
     let fieldsErros = [];
     let newPost = { ...PostEntity };
     let insert = false;
@@ -53,15 +54,15 @@ export const postFormSaveAction = (PostEntity) => {
         if (fieldsErros.length === 0) {
             if (insert) {
                 Api.savePost(newPost).then(post => {
-                    dispatch({ type: POST_FORM_SAVE, payload: newPost });
-                    dispatch({ type: ROOT_UPDATE_POSTS, payload: post });
+                    dispatch({ type: POST_FORM_SAVE, payload: { ...newPost, ...post } });
+                    dispatch({ type: ROOT_UPDATE_POSTS, payload: { ...newPost, ...post } });
                     dispatch({ type: ROOT_DIALOG_POST_FORM, payload: false });
                     dispatch({ type: POST_CLEAN_FORM });
                 });
             } else {
                 Api.editPost(newPost).then(post => {
-                    dispatch({ type: DETAIL_GET_POST, payload: post });
-                    dispatch({ type: ROOT_EDIT_POST, payload: post });
+                    dispatch({ type: DETAIL_GET_POST, payload: { ...newPost, ...post } });
+                    dispatch({ type: ROOT_EDIT_POST, payload: { ...newPost, ...post } });
                     dispatch({ type: ROOT_DIALOG_POST_FORM, payload: false });
                     dispatch({ type: POST_CLEAN_FORM });
                 });

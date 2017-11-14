@@ -37,7 +37,6 @@ export default (state = INITIAL_STATE, action) => {
         case ROOT_DIALOG_POST_FORM:
             return { ...state, openDialogState: action.payload }
         case ROOT_UPDATE_POSTS:
-            debugger;
             if (categorySelected === "all" || action.payload.category === categorySelected) {
                 return { ...state, posts: [...state.posts, action.payload] }
             } else {
