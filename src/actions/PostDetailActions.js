@@ -30,19 +30,7 @@ export const getPostDetailAction = (id, history) => {
 export const getAllCommentsByPostIdAction = (id) => {
     return dispatch => {
         Api.getAllCommentsByPostId(id).then(comments => {
-            dispatch({ type: DETAIL_GET_ALL_COMMENTS, payload: comments.filter(c => !c.deleted) });
-        });
-    }
-}
-
-export const deleteAllCommentsByPostIdAction = (post_id) => {
-    return dispatch => {
-        Api.getAllCommentsByPostId(post_id).then(comments => {
-            comments.map(comment => {
-                Api.deleteComment(comment.id).then(commentDeleted => {
-                    dispatch({ type: DETAIL_EDIT_COMMENT, payload: commentDeleted });
-                });
-            });
+            dispatch({ type: DETAIL_GET_ALL_COMMENTS, payload: comments.filter(c => !c.deleted && !c.parentDeleted) });
         });
     }
 }
