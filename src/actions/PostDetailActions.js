@@ -14,15 +14,10 @@ import {
 } from './ActionsTypes';
 import * as Api from '../util/api';
 
-export const getPostDetailAction = (id, history) => {
+export const getPostDetailAction = (id) => {
     return dispatch => {
         Api.getPostsDetail(id).then(post => {
-            if (Object.keys(post).length > 0 && post.error === undefined) {
-                dispatch({ type: DETAIL_GET_POST, payload: post });
-            } else {
-                alert("Sorry this post was not found.");
-                history.push("/");
-            }
+            dispatch({ type: DETAIL_GET_POST, payload: post });
         });
     }
 }

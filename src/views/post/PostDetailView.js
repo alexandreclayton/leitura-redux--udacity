@@ -31,9 +31,15 @@ import CommentFromView from '../comment/CommentFormView';
 class PostDetailFormView extends Component {
 
     componentDidMount() {
+        let { PostEntity, history } = this.props;
         let postId = this.props.match.params.postId;
         this.props.getPostDetailAction(postId, this.props.history);
         this.props.getAllCommentsByPostIdAction(postId);
+        // Validando
+        if (PostEntity.error !== undefined) {
+            alert("Sorry this post was not found.");
+            history.push("/");
+        }
     }
 
     render() {

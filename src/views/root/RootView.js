@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
+import sortBy from 'sort-by';
 import {
   rootChangeCategoryAction
   , rootChangeSortAction
@@ -20,7 +21,7 @@ class RootView extends Component {
 
   componentDidMount() {
     this.props.rootListCategoriesAction();
-    this.props.rootChangeCategoryAction("all", this.props.history);
+    this.props.rootChangeCategoryAction("all");
   }
 
   render() {
@@ -51,7 +52,8 @@ const mapStateToProps = state => (
     categorySelected: state.RootReducer.categorySelected
     , sortSelected: state.RootReducer.sortSelected
     , categories: state.RootReducer.categories
-    , posts: state.RootReducer.posts
+    , posts: (state.RootReducer.categorySelected !== 'all') ? state.RootReducer.posts.filter(p => !p.deleted && p.category === state.RootReducer.categorySelected) : state.RootReducer.posts.filter(p => !p.deleted)
+      .sort(sortBy(state.RootReducer.sortSelected))
     , openDialogState: state.RootReducer.openDialogState
   }
 );
