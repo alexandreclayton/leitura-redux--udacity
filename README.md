@@ -13,7 +13,7 @@ To get started developing right away:
 ```bash
 ├── CONTRIBUTING.md
 ├── README.md - This file.
-├── package.json # npm package manager file. It's unlikely that you'll need to modify this.
+├── package.json # npm package manager file. It's unlikely that you'll need to modify this
 ├── public
 │   ├── favicon.ico # React Icon, You may change if you wish.
 │   └── index.html # DO NOT MODIFY
